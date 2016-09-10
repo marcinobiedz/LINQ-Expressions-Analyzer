@@ -26,3 +26,7 @@ C:\Users\Marcin\Desktop\LINQ-Expressions-Analyzer\LINQapi\LINQapi\bin\System.Web
 C:\Users\Marcin\Desktop\LINQ-Expressions-Analyzer\LINQapi\LINQapi\obj\Debug\LINQapi.csprojResolveAssemblyReference.cache
 C:\Users\Marcin\Desktop\LINQ-Expressions-Analyzer\LINQapi\LINQapi\obj\Debug\LINQapi.dll
 C:\Users\Marcin\Desktop\LINQ-Expressions-Analyzer\LINQapi\LINQapi\obj\Debug\LINQapi.pdb
+C:\Users\Marcin\Desktop\LINQ-Expressions-Analyzer\LINQapi\LINQapi\bin\EntityFramework.dll
+C:\Users\Marcin\Desktop\LINQ-Expressions-Analyzer\LINQapi\LINQapi\bin\EntityFramework.SqlServer.dll
+C:\Users\Marcin\Desktop\LINQ-Expressions-Analyzer\LINQapi\LINQapi\bin\EntityFramework.xml
+C:\Users\Marcin\Desktop\LINQ-Expressions-Analyzer\LINQapi\LINQapi\bin\EntityFramework.SqlServer.xml

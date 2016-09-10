@@ -9,9 +9,11 @@ namespace LINQapi.Controllers
 {
     public class TestController : ApiController
     {
-        public void get(int id)
+        //private AdventureWorksLT2012Entities db = new AdventureWorksLT2012Entities();
+
+        public List<dynamic> Get(int id)
         {
-            Console.Write(id);
+            return null;
         }
     }
 }
