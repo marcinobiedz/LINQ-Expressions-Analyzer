@@ -17,7 +17,7 @@ namespace LINQapi
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public SalesOrderHeader()
         {
-            this.SalesOrderDetail = new HashSet<SalesOrderDetail>();
+            this.SalesOrderDetails = new HashSet<SalesOrderDetail>();
         }
     
         public int SalesOrderID { get; set; }
@@ -44,6 +44,6 @@ namespace LINQapi
         public virtual Address Address1 { get; set; }
         public virtual Customer Customer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SalesOrderDetail> SalesOrderDetail { get; set; }
+        public virtual ICollection<SalesOrderDetail> SalesOrderDetails { get; set; }
     }
 }

@@ -17,9 +17,9 @@ namespace LINQapi
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Address()
         {
-            this.CustomerAddress = new HashSet<CustomerAddress>();
-            this.SalesOrderHeader = new HashSet<SalesOrderHeader>();
-            this.SalesOrderHeader1 = new HashSet<SalesOrderHeader>();
+            this.CustomerAddresses = new HashSet<CustomerAddress>();
+            this.SalesOrderHeaders = new HashSet<SalesOrderHeader>();
+            this.SalesOrderHeaders1 = new HashSet<SalesOrderHeader>();
         }
     
         public int AddressID { get; set; }
@@ -33,10 +33,10 @@ namespace LINQapi
         public System.DateTime ModifiedDate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CustomerAddress> CustomerAddress { get; set; }
+        public virtual ICollection<CustomerAddress> CustomerAddresses { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SalesOrderHeader> SalesOrderHeader { get; set; }
+        public virtual ICollection<SalesOrderHeader> SalesOrderHeaders { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SalesOrderHeader> SalesOrderHeader1 { get; set; }
+        public virtual ICollection<SalesOrderHeader> SalesOrderHeaders1 { get; set; }
     }
 }

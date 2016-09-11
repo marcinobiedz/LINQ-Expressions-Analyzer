@@ -430,9 +430,9 @@ warning 6002: The table/view 'AdventureWorksLT2012.dbo.BuildVersion' does not ha
           <Property Name="PostalCode" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="rowguid" Type="Guid" Nullable="false" />
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="CustomerAddress" Relationship="Self.FK_CustomerAddress_Address_AddressID" FromRole="Address" ToRole="CustomerAddress" />
-          <NavigationProperty Name="SalesOrderHeader" Relationship="Self.FK_SalesOrderHeader_Address_BillTo_AddressID" FromRole="Address" ToRole="SalesOrderHeader" />
-          <NavigationProperty Name="SalesOrderHeader1" Relationship="Self.FK_SalesOrderHeader_Address_ShipTo_AddressID" FromRole="Address" ToRole="SalesOrderHeader" />
+          <NavigationProperty Name="CustomerAddresses" Relationship="Self.FK_CustomerAddress_Address_AddressID" FromRole="Address" ToRole="CustomerAddress" />
+          <NavigationProperty Name="SalesOrderHeaders" Relationship="Self.FK_SalesOrderHeader_Address_BillTo_AddressID" FromRole="Address" ToRole="SalesOrderHeader" />
+          <NavigationProperty Name="SalesOrderHeaders1" Relationship="Self.FK_SalesOrderHeader_Address_ShipTo_AddressID" FromRole="Address" ToRole="SalesOrderHeader" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
@@ -453,8 +453,8 @@ warning 6002: The table/view 'AdventureWorksLT2012.dbo.BuildVersion' does not ha
           <Property Name="PasswordSalt" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="rowguid" Type="Guid" Nullable="false" />
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="CustomerAddress" Relationship="Self.FK_CustomerAddress_Customer_CustomerID" FromRole="Customer" ToRole="CustomerAddress" />
-          <NavigationProperty Name="SalesOrderHeader" Relationship="Self.FK_SalesOrderHeader_Customer_CustomerID" FromRole="Customer" ToRole="SalesOrderHeader" />
+          <NavigationProperty Name="CustomerAddresses" Relationship="Self.FK_CustomerAddress_Customer_CustomerID" FromRole="Customer" ToRole="CustomerAddress" />
+          <NavigationProperty Name="SalesOrderHeaders" Relationship="Self.FK_SalesOrderHeader_Customer_CustomerID" FromRole="Customer" ToRole="SalesOrderHeader" />
         </EntityType>
         <EntityType Name="CustomerAddress">
           <Key>
@@ -490,7 +490,7 @@ warning 6002: The table/view 'AdventureWorksLT2012.dbo.BuildVersion' does not ha
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="ProductCategory" Relationship="Self.FK_Product_ProductCategory_ProductCategoryID" FromRole="Product" ToRole="ProductCategory" />
           <NavigationProperty Name="ProductModel" Relationship="Self.FK_Product_ProductModel_ProductModelID" FromRole="Product" ToRole="ProductModel" />
-          <NavigationProperty Name="SalesOrderDetail" Relationship="Self.FK_SalesOrderDetail_Product_ProductID" FromRole="Product" ToRole="SalesOrderDetail" />
+          <NavigationProperty Name="SalesOrderDetails" Relationship="Self.FK_SalesOrderDetail_Product_ProductID" FromRole="Product" ToRole="SalesOrderDetail" />
         </EntityType>
         <EntityType Name="ProductCategory">
           <Key>
@@ -500,7 +500,7 @@ warning 6002: The table/view 'AdventureWorksLT2012.dbo.BuildVersion' does not ha
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="rowguid" Type="Guid" Nullable="false" />
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_Product_ProductCategory_ProductCategoryID" FromRole="ProductCategory" ToRole="Product" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_Product_ProductCategory_ProductCategoryID" FromRole="ProductCategory" ToRole="Product" />
           <NavigationProperty Name="ProductCategory1" Relationship="Self.FK_ProductCategory_ProductCategory_ParentProductCategoryID_ProductCategoryID" FromRole="ProductCategory" ToRole="ProductCategory1" />
           <NavigationProperty Name="ProductCategory2" Relationship="Self.FK_ProductCategory_ProductCategory_ParentProductCategoryID_ProductCategoryID" FromRole="ProductCategory1" ToRole="ProductCategory" />
         </EntityType>
@@ -512,7 +512,7 @@ warning 6002: The table/view 'AdventureWorksLT2012.dbo.BuildVersion' does not ha
           <Property Name="Description" Type="String" MaxLength="400" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="rowguid" Type="Guid" Nullable="false" />
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="ProductModelProductDescription" Relationship="Self.FK_ProductModelProductDescription_ProductDescription_ProductDescriptionID" FromRole="ProductDescription" ToRole="ProductModelProductDescription" />
+          <NavigationProperty Name="ProductModelProductDescriptions" Relationship="Self.FK_ProductModelProductDescription_ProductDescription_ProductDescriptionID" FromRole="ProductDescription" ToRole="ProductModelProductDescription" />
         </EntityType>
         <EntityType Name="ProductModel">
           <Key>
@@ -523,8 +523,8 @@ warning 6002: The table/view 'AdventureWorksLT2012.dbo.BuildVersion' does not ha
           <Property Name="CatalogDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="rowguid" Type="Guid" Nullable="false" />
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_Product_ProductModel_ProductModelID" FromRole="ProductModel" ToRole="Product" />
-          <NavigationProperty Name="ProductModelProductDescription" Relationship="Self.FK_ProductModelProductDescription_ProductModel_ProductModelID" FromRole="ProductModel" ToRole="ProductModelProductDescription" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_Product_ProductModel_ProductModelID" FromRole="ProductModel" ToRole="Product" />
+          <NavigationProperty Name="ProductModelProductDescriptions" Relationship="Self.FK_ProductModelProductDescription_ProductModel_ProductModelID" FromRole="ProductModel" ToRole="ProductModelProductDescription" />
         </EntityType>
         <EntityType Name="ProductModelProductDescription">
           <Key>
@@ -582,7 +582,7 @@ warning 6002: The table/view 'AdventureWorksLT2012.dbo.BuildVersion' does not ha
           <NavigationProperty Name="Address" Relationship="Self.FK_SalesOrderHeader_Address_BillTo_AddressID" FromRole="SalesOrderHeader" ToRole="Address" />
           <NavigationProperty Name="Address1" Relationship="Self.FK_SalesOrderHeader_Address_ShipTo_AddressID" FromRole="SalesOrderHeader" ToRole="Address" />
           <NavigationProperty Name="Customer" Relationship="Self.FK_SalesOrderHeader_Customer_CustomerID" FromRole="SalesOrderHeader" ToRole="Customer" />
-          <NavigationProperty Name="SalesOrderDetail" Relationship="Self.FK_SalesOrderDetail_SalesOrderHeader_SalesOrderID" FromRole="SalesOrderHeader" ToRole="SalesOrderDetail" />
+          <NavigationProperty Name="SalesOrderDetails" Relationship="Self.FK_SalesOrderDetail_SalesOrderHeader_SalesOrderID" FromRole="SalesOrderHeader" ToRole="SalesOrderDetail" />
         </EntityType>
         <EntityType Name="BuildVersion">
           <Key>
@@ -687,65 +687,65 @@ warning 6002: The table/view 'AdventureWorksLT2012.dbo.BuildVersion' does not ha
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="AdventureWorksLT2012Entities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="ErrorLog" EntityType="Self.ErrorLog" />
-          <EntitySet Name="Address" EntityType="Self.Address" />
-          <EntitySet Name="Customer" EntityType="Self.Customer" />
-          <EntitySet Name="CustomerAddress" EntityType="Self.CustomerAddress" />
-          <EntitySet Name="Product" EntityType="Self.Product" />
-          <EntitySet Name="ProductCategory" EntityType="Self.ProductCategory" />
-          <EntitySet Name="ProductDescription" EntityType="Self.ProductDescription" />
-          <EntitySet Name="ProductModel" EntityType="Self.ProductModel" />
-          <EntitySet Name="ProductModelProductDescription" EntityType="Self.ProductModelProductDescription" />
-          <EntitySet Name="SalesOrderDetail" EntityType="Self.SalesOrderDetail" />
-          <EntitySet Name="SalesOrderHeader" EntityType="Self.SalesOrderHeader" />
-          <EntitySet Name="BuildVersion" EntityType="Self.BuildVersion" />
+          <EntitySet Name="ErrorLogs" EntityType="Self.ErrorLog" />
+          <EntitySet Name="Addresses" EntityType="Self.Address" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="CustomerAddresses" EntityType="Self.CustomerAddress" />
+          <EntitySet Name="Products" EntityType="Self.Product" />
+          <EntitySet Name="ProductCategories" EntityType="Self.ProductCategory" />
+          <EntitySet Name="ProductDescriptions" EntityType="Self.ProductDescription" />
+          <EntitySet Name="ProductModels" EntityType="Self.ProductModel" />
+          <EntitySet Name="ProductModelProductDescriptions" EntityType="Self.ProductModelProductDescription" />
+          <EntitySet Name="SalesOrderDetails" EntityType="Self.SalesOrderDetail" />
+          <EntitySet Name="SalesOrderHeaders" EntityType="Self.SalesOrderHeader" />
+          <EntitySet Name="BuildVersions" EntityType="Self.BuildVersion" />
           <AssociationSet Name="FK_CustomerAddress_Address_AddressID" Association="Self.FK_CustomerAddress_Address_AddressID">
-            <End Role="Address" EntitySet="Address" />
-            <End Role="CustomerAddress" EntitySet="CustomerAddress" />
+            <End Role="Address" EntitySet="Addresses" />
+            <End Role="CustomerAddress" EntitySet="CustomerAddresses" />
           </AssociationSet>
           <AssociationSet Name="FK_SalesOrderHeader_Address_BillTo_AddressID" Association="Self.FK_SalesOrderHeader_Address_BillTo_AddressID">
-            <End Role="Address" EntitySet="Address" />
-            <End Role="SalesOrderHeader" EntitySet="SalesOrderHeader" />
+            <End Role="Address" EntitySet="Addresses" />
+            <End Role="SalesOrderHeader" EntitySet="SalesOrderHeaders" />
           </AssociationSet>
           <AssociationSet Name="FK_SalesOrderHeader_Address_ShipTo_AddressID" Association="Self.FK_SalesOrderHeader_Address_ShipTo_AddressID">
-            <End Role="Address" EntitySet="Address" />
-            <End Role="SalesOrderHeader" EntitySet="SalesOrderHeader" />
+            <End Role="Address" EntitySet="Addresses" />
+            <End Role="SalesOrderHeader" EntitySet="SalesOrderHeaders" />
           </AssociationSet>
           <AssociationSet Name="FK_CustomerAddress_Customer_CustomerID" Association="Self.FK_CustomerAddress_Customer_CustomerID">
-            <End Role="Customer" EntitySet="Customer" />
-            <End Role="CustomerAddress" EntitySet="CustomerAddress" />
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="CustomerAddress" EntitySet="CustomerAddresses" />
           </AssociationSet>
           <AssociationSet Name="FK_SalesOrderHeader_Customer_CustomerID" Association="Self.FK_SalesOrderHeader_Customer_CustomerID">
-            <End Role="Customer" EntitySet="Customer" />
-            <End Role="SalesOrderHeader" EntitySet="SalesOrderHeader" />
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="SalesOrderHeader" EntitySet="SalesOrderHeaders" />
           </AssociationSet>
           <AssociationSet Name="FK_Product_ProductCategory_ProductCategoryID" Association="Self.FK_Product_ProductCategory_ProductCategoryID">
-            <End Role="ProductCategory" EntitySet="ProductCategory" />
-            <End Role="Product" EntitySet="Product" />
+            <End Role="ProductCategory" EntitySet="ProductCategories" />
+            <End Role="Product" EntitySet="Products" />
           </AssociationSet>
           <AssociationSet Name="FK_Product_ProductModel_ProductModelID" Association="Self.FK_Product_ProductModel_ProductModelID">
-            <End Role="ProductModel" EntitySet="ProductModel" />
-            <End Role="Product" EntitySet="Product" />
+            <End Role="ProductModel" EntitySet="ProductModels" />
+            <End Role="Product" EntitySet="Products" />
           </AssociationSet>
           <AssociationSet Name="FK_SalesOrderDetail_Product_ProductID" Association="Self.FK_SalesOrderDetail_Product_ProductID">
-            <End Role="Product" EntitySet="Product" />
-            <End Role="SalesOrderDetail" EntitySet="SalesOrderDetail" />
+            <End Role="Product" EntitySet="Products" />
+            <End Role="SalesOrderDetail" EntitySet="SalesOrderDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_ProductCategory_ProductCategory_ParentProductCategoryID_ProductCategoryID" Association="Self.FK_ProductCategory_ProductCategory_ParentProductCategoryID_ProductCategoryID">
-            <End Role="ProductCategory" EntitySet="ProductCategory" />
-            <End Role="ProductCategory1" EntitySet="ProductCategory" />
+            <End Role="ProductCategory" EntitySet="ProductCategories" />
+            <End Role="ProductCategory1" EntitySet="ProductCategories" />
           </AssociationSet>
           <AssociationSet Name="FK_ProductModelProductDescription_ProductDescription_ProductDescriptionID" Association="Self.FK_ProductModelProductDescription_ProductDescription_ProductDescriptionID">
-            <End Role="ProductDescription" EntitySet="ProductDescription" />
-            <End Role="ProductModelProductDescription" EntitySet="ProductModelProductDescription" />
+            <End Role="ProductDescription" EntitySet="ProductDescriptions" />
+            <End Role="ProductModelProductDescription" EntitySet="ProductModelProductDescriptions" />
           </AssociationSet>
           <AssociationSet Name="FK_ProductModelProductDescription_ProductModel_ProductModelID" Association="Self.FK_ProductModelProductDescription_ProductModel_ProductModelID">
-            <End Role="ProductModel" EntitySet="ProductModel" />
-            <End Role="ProductModelProductDescription" EntitySet="ProductModelProductDescription" />
+            <End Role="ProductModel" EntitySet="ProductModels" />
+            <End Role="ProductModelProductDescription" EntitySet="ProductModelProductDescriptions" />
           </AssociationSet>
           <AssociationSet Name="FK_SalesOrderDetail_SalesOrderHeader_SalesOrderID" Association="Self.FK_SalesOrderDetail_SalesOrderHeader_SalesOrderID">
-            <End Role="SalesOrderHeader" EntitySet="SalesOrderHeader" />
-            <End Role="SalesOrderDetail" EntitySet="SalesOrderDetail" />
+            <End Role="SalesOrderHeader" EntitySet="SalesOrderHeaders" />
+            <End Role="SalesOrderDetail" EntitySet="SalesOrderDetails" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -754,7 +754,7 @@ warning 6002: The table/view 'AdventureWorksLT2012.dbo.BuildVersion' does not ha
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="AdventureWorksLT2012ModelStoreContainer" CdmEntityContainer="AdventureWorksLT2012Entities">
-          <EntitySetMapping Name="ErrorLog">
+          <EntitySetMapping Name="ErrorLogs">
             <EntityTypeMapping TypeName="AdventureWorksLT2012Model.ErrorLog">
               <MappingFragment StoreEntitySet="ErrorLog">
                 <ScalarProperty Name="ErrorLogID" ColumnName="ErrorLogID" />
@@ -769,7 +769,7 @@ warning 6002: The table/view 'AdventureWorksLT2012.dbo.BuildVersion' does not ha
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Address">
+          <EntitySetMapping Name="Addresses">
             <EntityTypeMapping TypeName="AdventureWorksLT2012Model.Address">
               <MappingFragment StoreEntitySet="Address">
                 <ScalarProperty Name="AddressID" ColumnName="AddressID" />
@@ -784,7 +784,7 @@ warning 6002: The table/view 'AdventureWorksLT2012.dbo.BuildVersion' does not ha
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Customer">
+          <EntitySetMapping Name="Customers">
             <EntityTypeMapping TypeName="AdventureWorksLT2012Model.Customer">
               <MappingFragment StoreEntitySet="Customer">
                 <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
@@ -805,7 +805,7 @@ warning 6002: The table/view 'AdventureWorksLT2012.dbo.BuildVersion' does not ha
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="CustomerAddress">
+          <EntitySetMapping Name="CustomerAddresses">
             <EntityTypeMapping TypeName="AdventureWorksLT2012Model.CustomerAddress">
               <MappingFragment StoreEntitySet="CustomerAddress">
                 <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
@@ -816,7 +816,7 @@ warning 6002: The table/view 'AdventureWorksLT2012.dbo.BuildVersion' does not ha
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Product">
+          <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="AdventureWorksLT2012Model.Product">
               <MappingFragment StoreEntitySet="Product">
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
@@ -837,7 +837,7 @@ warning 6002: The table/view 'AdventureWorksLT2012.dbo.BuildVersion' does not ha
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ProductCategory">
+          <EntitySetMapping Name="ProductCategories">
             <EntityTypeMapping TypeName="AdventureWorksLT2012Model.ProductCategory">
               <MappingFragment StoreEntitySet="ProductCategory">
                 <ScalarProperty Name="ProductCategoryID" ColumnName="ProductCategoryID" />
@@ -847,7 +847,7 @@ warning 6002: The table/view 'AdventureWorksLT2012.dbo.BuildVersion' does not ha
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ProductDescription">
+          <EntitySetMapping Name="ProductDescriptions">
             <EntityTypeMapping TypeName="AdventureWorksLT2012Model.ProductDescription">
               <MappingFragment StoreEntitySet="ProductDescription">
                 <ScalarProperty Name="ProductDescriptionID" ColumnName="ProductDescriptionID" />
@@ -857,7 +857,7 @@ warning 6002: The table/view 'AdventureWorksLT2012.dbo.BuildVersion' does not ha
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ProductModel">
+          <EntitySetMapping Name="ProductModels">
             <EntityTypeMapping TypeName="AdventureWorksLT2012Model.ProductModel">
               <MappingFragment StoreEntitySet="ProductModel">
                 <ScalarProperty Name="ProductModelID" ColumnName="ProductModelID" />
@@ -868,7 +868,7 @@ warning 6002: The table/view 'AdventureWorksLT2012.dbo.BuildVersion' does not ha
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ProductModelProductDescription">
+          <EntitySetMapping Name="ProductModelProductDescriptions">
             <EntityTypeMapping TypeName="AdventureWorksLT2012Model.ProductModelProductDescription">
               <MappingFragment StoreEntitySet="ProductModelProductDescription">
                 <ScalarProperty Name="ProductModelID" ColumnName="ProductModelID" />
@@ -879,7 +879,7 @@ warning 6002: The table/view 'AdventureWorksLT2012.dbo.BuildVersion' does not ha
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="SalesOrderDetail">
+          <EntitySetMapping Name="SalesOrderDetails">
             <EntityTypeMapping TypeName="AdventureWorksLT2012Model.SalesOrderDetail">
               <MappingFragment StoreEntitySet="SalesOrderDetail">
                 <ScalarProperty Name="SalesOrderID" ColumnName="SalesOrderID" />
@@ -893,7 +893,7 @@ warning 6002: The table/view 'AdventureWorksLT2012.dbo.BuildVersion' does not ha
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="SalesOrderHeader">
+          <EntitySetMapping Name="SalesOrderHeaders">
             <EntityTypeMapping TypeName="AdventureWorksLT2012Model.SalesOrderHeader">
               <MappingFragment StoreEntitySet="SalesOrderHeader">
                 <ScalarProperty Name="SalesOrderID" ColumnName="SalesOrderID" />
@@ -918,7 +918,7 @@ warning 6002: The table/view 'AdventureWorksLT2012.dbo.BuildVersion' does not ha
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="BuildVersion">
+          <EntitySetMapping Name="BuildVersions">
             <EntityTypeMapping TypeName="AdventureWorksLT2012Model.BuildVersion">
               <MappingFragment StoreEntitySet="BuildVersion">
                 <ScalarProperty Name="SystemInformationID" ColumnName="SystemInformationID" />
@@ -1004,7 +1004,7 @@ warning 6002: The table/view 'AdventureWorksLT2012.dbo.BuildVersion' does not ha
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="false" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

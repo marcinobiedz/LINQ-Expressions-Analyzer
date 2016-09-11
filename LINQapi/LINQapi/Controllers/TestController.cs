@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LINQapi.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -9,11 +10,12 @@ namespace LINQapi.Controllers
 {
     public class TestController : ApiController
     {
-        //private AdventureWorksLT2012Entities db = new AdventureWorksLT2012Entities();
-
-        public List<dynamic> Get(int id)
+        public void Get(int id)
         {
-            return null;
+            var a = "db.Customers.Where(cus=>cus.FirstName == \"Alan\").Take(2)";
+            var test = new ExpressionGenerator();
+            //var a1 = test.Execute(a);
+            test.Execute(a);
         }
     }
 }

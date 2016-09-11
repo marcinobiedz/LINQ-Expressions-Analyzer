@@ -141,6 +141,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\CodeExample.cs" />
+    <Compile Include="Helpers\CodeHelper.cs" />
+    <Compile Include="Helpers\ExpressionGenerator.cs" />
     <Compile Include="Product.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>

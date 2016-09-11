@@ -17,16 +17,16 @@ namespace LINQapi.Controllers
         private AdventureWorksLT2012Entities db = new AdventureWorksLT2012Entities();
 
         // GET: api/Customers
-        public IQueryable<Customer> GetCustomer()
+        public int GetCustomer()
         {
-            return db.Customer;
+            return db.Customers.ToList().Count;
         }
 
         // GET: api/Customers/5
         [ResponseType(typeof(Customer))]
         public IHttpActionResult GetCustomer(int id)
         {
-            Customer customer = db.Customer.Find(id);
+            Customer customer = db.Customers.Find(id);
             if (customer == null)
             {
                 return NotFound();
@@ -79,7 +79,7 @@ namespace LINQapi.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.Customer.Add(customer);
+            db.Customers.Add(customer);
             db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = customer.CustomerID }, customer);
@@ -89,13 +89,13 @@ namespace LINQapi.Controllers
         [ResponseType(typeof(Customer))]
         public IHttpActionResult DeleteCustomer(int id)
         {
-            Customer customer = db.Customer.Find(id);
+            Customer customer = db.Customers.Find(id);
             if (customer == null)
             {
                 return NotFound();
             }
 
-            db.Customer.Remove(customer);
+            db.Customers.Remove(customer);
             db.SaveChanges();
 
             return Ok(customer);
@@ -112,7 +112,7 @@ namespace LINQapi.Controllers
 
         private bool CustomerExists(int id)
         {
-            return db.Customer.Count(e => e.CustomerID == id) > 0;
+            return db.Customers.Count(e => e.CustomerID == id) > 0;
         }
     }
 }

@@ -17,7 +17,7 @@ namespace LINQapi
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Product()
         {
-            this.SalesOrderDetail = new HashSet<SalesOrderDetail>();
+            this.SalesOrderDetails = new HashSet<SalesOrderDetail>();
         }
     
         public int ProductID { get; set; }
@@ -39,6 +39,6 @@ namespace LINQapi
         public virtual ProductCategory ProductCategory { get; set; }
         public virtual ProductModel ProductModel { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SalesOrderDetail> SalesOrderDetail { get; set; }
+        public virtual ICollection<SalesOrderDetail> SalesOrderDetails { get; set; }
     }
 }
