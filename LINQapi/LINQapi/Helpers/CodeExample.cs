@@ -11,7 +11,7 @@ namespace LINQapi.Helpers
         {
             var prodCat = db.ProductCategories.ToList();
             var prod = db.Products.ToList();
-            return prod.Join()
+            return prod.AsQueryable().Expression;
         }
     }
 }
