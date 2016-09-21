@@ -12,7 +12,7 @@ namespace LINQapi.Controllers
     {
         public void Get(int id)
         {
-            var a = "db.Customers.Where(cus=>cus.FirstName == \"Alan\").Take(2)";
+            //var a = "db.Customers.Where(cus=>cus.FirstName == \"Alan\").Take(2)";
             var test = new ExpressionGenerator();
             //var a1 = test.Execute(a);
             test.Execute(a);

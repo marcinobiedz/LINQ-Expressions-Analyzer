@@ -9,7 +9,9 @@ namespace LINQapi.Helpers
         private LINQapi.AdventureWorksLT2012Entities db = new LINQapi.AdventureWorksLT2012Entities();
         public Expression Execute()
         {
-            return db.Customers.Where(cus=>cus.FirstName == "Alan").Take(2).Expression;
+            var prodCat = db.ProductCategories.ToList();
+            var prod = db.Products.ToList();
+            return prod.Join()
         }
     }
 }
