@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CSVcreator.Models
+namespace LINQapi.Models
 {
     class SalesOrderHeader
     {

@@ -7,9 +7,9 @@ using System.Text;
 
 namespace LINQapi.Helpers
 {
-    public class ExpressionGenerator
+    class ExpressionGenerator
     {
-        public void Execute(string codeToEval)
+        public void Execute(string codeToEval, MyDbSet db)
         {
             StringBuilder sb = new StringBuilder();
 
@@ -19,10 +19,9 @@ namespace LINQapi.Helpers
             sb.AppendLine();
             sb.AppendLine("namespace LINQapi.Helpers");
             sb.AppendLine("{");
-            sb.AppendLine("      public class MyQuery");
+            sb.AppendLine("      class MyQuery");
             sb.AppendLine("      {");
-            sb.AppendLine("            private LINQapi.AdventureWorksLT2012Entities db = new LINQapi.AdventureWorksLT2012Entities();");
-            sb.AppendLine("            public Expression result()");
+            sb.AppendLine("            public Expression result(MyDbSet db)");
             sb.AppendLine("            {");
             sb.AppendLine("                 return " + codeToEval + ".Expression;");
             sb.AppendLine("            }");
@@ -57,7 +56,7 @@ namespace LINQapi.Helpers
                 Console.WriteLine(ex);
                 throw;
             }
-            var targetValues = classRef.result();
+            var targetValues = classRef.result(db);
         }
     }
 }
