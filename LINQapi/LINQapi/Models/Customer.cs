@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LINQapi.Models
 {
-    class Customer
+    public class Customer
     {
         public int CustomerID { get; set; }
         public string FirstName { get; set; }

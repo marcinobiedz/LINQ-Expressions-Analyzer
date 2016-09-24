@@ -9,11 +9,7 @@ namespace LINQapi.Helpers
     {
         public static object HelperFunction(string classCode, string mainClass, string[] requiredAssemblies)
         {
-            CSharpCodeProvider provider = new CSharpCodeProvider(new Dictionary<string, string>
-              {
-                 { "CompilerVersion", "v4.0" }
-              });
-
+            CSharpCodeProvider provider = new CSharpCodeProvider(new Dictionary<string, string> { { "CompilerVersion", "v4.0" } });
             CompilerParameters parameters = new CompilerParameters
             {
                 GenerateExecutable = false,       // Create a dll

@@ -2,7 +2,7 @@
 
 namespace LINQapi.Models
 {
-    class SalesOrderHeader
+    public class SalesOrderHeader
     {
         public int SalesOrderID { get; set; }
         public DateTime OrderDate { get; set; }

@@ -5,7 +5,7 @@ using System.IO;
 
 namespace LINQapi.Helpers
 {
-    class MyDbSet
+    public class MyDbSet
     {
         private string path = AppDomain.CurrentDomain.BaseDirectory + @"Database\";
         public List<Address> Addresses { get; }
