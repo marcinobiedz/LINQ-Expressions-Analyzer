@@ -98,13 +98,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\TestController.cs" />
+    <Compile Include="Controllers\ExpTreeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\CodeExample.cs" />
     <Compile Include="Helpers\ClassGenerator.cs" />
     <Compile Include="Helpers\ExpressionGenerator.cs" />
+    <Compile Include="Helpers\ExpressionTreeAnalyzer.cs" />
     <Compile Include="Helpers\MyDbSet.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\Customer.cs" />
