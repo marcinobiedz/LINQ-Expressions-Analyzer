@@ -13,10 +13,11 @@ namespace LINQapi.Controllers
         public void Get(int id)
         {
             var db = new MyDbSet();
-            var aaa = db.Customers.Where(cus => cus.CustomerID > 5).AsQueryable().Expression;
+            //var aaa = db.Customers.Where(cus => cus.CustomerID > 5).AsQueryable().Expression;
             //var bb = db.Customers.Where(cus => cus.CustomerID > 50)
             //var a = "db.Customers.Where(cus=>cus.FirstName == \"Alan\").Take(2)";
             var test = new ExpressionGenerator();
+            test.GenerateExpression("db.Customers.AsQueryable().Where(cus => cus.CustomerID > 5)", db);
             //var a1 = test.Execute(a);
             //test.Execute(a);
         }

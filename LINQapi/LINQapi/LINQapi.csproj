@@ -103,7 +103,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\CodeExample.cs" />
-    <Compile Include="Helpers\CodeHelper.cs" />
+    <Compile Include="Helpers\ClassGenerator.cs" />
     <Compile Include="Helpers\ExpressionGenerator.cs" />
     <Compile Include="Helpers\MyDbSet.cs" />
     <Compile Include="Models\Address.cs" />
