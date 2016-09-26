@@ -97,6 +97,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Analyzer\ExpressionTreeNode.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ExpTreeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -104,7 +105,7 @@
     </Compile>
     <Compile Include="Helpers\ClassGenerator.cs" />
     <Compile Include="Helpers\ExpressionGenerator.cs" />
-    <Compile Include="Helpers\ExpressionTreeAnalyzer.cs" />
+    <Compile Include="Analyzer\ExpressionTreeAnalyzer.cs" />
     <Compile Include="Helpers\MyDbSet.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\Customer.cs" />
