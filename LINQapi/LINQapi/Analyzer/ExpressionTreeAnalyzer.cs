@@ -9,6 +9,19 @@ namespace LINQapi.Helpers
 {
     public class ExpressionTreeAnalyzer
     {
+        private Func<int> nextId;
+        private Func<int> createIterator()
+        {
+            int nextIndex = 0;
+            return () =>
+            {
+                return nextIndex++;
+            };
+        }
+        public ExpressionTreeAnalyzer()
+        {
+            nextId = createIterator();
+        }
         public ExpressionTreeNode GetExpressionTreeNode(Expression expression, string prefix = null)
         {
             ExpressionTreeNode node = null;
