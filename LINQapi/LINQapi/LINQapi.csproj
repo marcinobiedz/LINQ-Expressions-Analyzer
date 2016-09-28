@@ -104,9 +104,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\ClassGenerator.cs" />
-    <Compile Include="Helpers\ExpressionGenerator.cs" />
+    <Compile Include="Helpers\QueryGenerator.cs" />
     <Compile Include="Analyzer\ExpressionTreeAnalyzer.cs" />
     <Compile Include="Helpers\MyDbSet.cs" />
+    <Compile Include="Helpers\WebQueryValidator.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Product.cs" />

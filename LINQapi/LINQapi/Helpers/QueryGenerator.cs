@@ -1,27 +1,48 @@
-﻿using System;
-using System.CodeDom.Compiler;
+﻿using System.CodeDom.Compiler;
+using System.Diagnostics;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 
 namespace LINQapi.Helpers
 {
-    class ExpressionGenerator
+    public class QueryGenerator
     {
+        private string originalQueryFromWeb;
+        private MyDbSet db;
         private StringBuilder sb = new StringBuilder();
         private ClassGenerator classGen = new ClassGenerator();
-        public Expression GenerateExpression(string codeToEval, MyDbSet db)
+        private IQueryable<object> generatedQuery;
+        public Expression Expression { get; }
+        public int initialCount { get; }
+        public int finalCount { get; }
+        public long executionTime { get; }
+
+        public QueryGenerator(string queryFromWeb, MyDbSet db)
+        {
+            this.db = db;
+            originalQueryFromWeb = queryFromWeb;
+            generatedQuery = GenerateQuery();
+            Expression = generatedQuery.Expression;
+            var stopwatch = new Stopwatch();
+            stopwatch.Start();
+            var list = generatedQuery.ToList();
+            stopwatch.Stop();
+            finalCount = list.Count;
+            executionTime = stopwatch.ElapsedMilliseconds;
+        }
+
+        private IQueryable<object> GenerateQuery()
         {
             // Create the class as usual
             sb.AppendLine("using System.Linq;");
-            sb.AppendLine("using System.Linq.Expressions;");
-            sb.AppendLine();
             sb.AppendLine("namespace LINQapi.Helpers");
             sb.AppendLine("{");
             sb.AppendLine("      public class MyQuery");
             sb.AppendLine("      {");
-            sb.AppendLine("            public Expression result(MyDbSet db)");
+            sb.AppendLine("            public IQueryable<object> result(MyDbSet db)");
             sb.AppendLine("            {");
-            sb.AppendLine("                 return " + codeToEval + ".Expression;");
+            sb.AppendLine("                 return " + originalQueryFromWeb + ";");
             sb.AppendLine("            }");
             sb.AppendLine("      }");
             sb.AppendLine("}");
@@ -43,7 +64,7 @@ namespace LINQapi.Helpers
                 }
                 return null;
             }
-            Expression targetValues = classRef.result(db);
+            IQueryable<object> targetValues = classRef.result(this.db);
             return targetValues;
         }
     }

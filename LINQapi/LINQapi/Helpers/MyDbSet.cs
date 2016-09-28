@@ -14,6 +14,7 @@ namespace LINQapi.Helpers
         public List<ProductCategory> ProductCategories { get; }
         public List<SalesOrderDetail> SalesOrderDetails { get; }
         public List<SalesOrderHeader> SalesOrderHeaders { get; }
+        public Dictionary<string, int> ColectionSizes = new Dictionary<string, int>();
 
         public MyDbSet()
         {
@@ -29,6 +30,12 @@ namespace LINQapi.Helpers
             this.setSalesOrderDetails();
             this.SalesOrderHeaders = new List<SalesOrderHeader>();
             this.setSalesOrderHeaders();
+            ColectionSizes.Add("Addresses", Addresses.Count);
+            ColectionSizes.Add("Customers", Customers.Count);
+            ColectionSizes.Add("Products", Products.Count);
+            ColectionSizes.Add("ProductCategories", ProductCategories.Count);
+            ColectionSizes.Add("SalesOrderDetails", SalesOrderDetails.Count);
+            ColectionSizes.Add("SalesOrderHeaders", SalesOrderHeaders.Count);
         }
 
         private void setSalesOrderHeaders()
