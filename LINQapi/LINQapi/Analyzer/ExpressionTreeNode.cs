@@ -7,16 +7,15 @@ namespace LINQapi.Analyzer
 {
     public class ExpressionTreeNode
     {
-        public ExpressionTreeNode(string text)
+        public ExpressionTreeNode(string text, int? parentId = null)
         {
-            this.Text = text;
-            this.Nodes = new List<ExpressionTreeNode>();
+            Text = text;
+            ParentId = parentId;
         }
 
         public int Id { get; set; }
-        public int ParentId { get; set; }
+        public int? ParentId { get; set; }
         public string Text { get; set; }
-        public List<ExpressionTreeNode> Nodes { get; set; }
         public string ExpressionString { get; set; }
     }
 }

@@ -18,11 +18,13 @@ namespace LINQapi.Helpers
                 return nextIndex++;
             };
         }
+        private List<ExpressionTreeNode> nodes = new List<ExpressionTreeNode>();
+
         public ExpressionTreeAnalyzer()
         {
             nextId = createIterator();
         }
-        public ExpressionTreeNode GetExpressionTreeNode(Expression expression, string prefix = null)
+        public ExpressionTreeNode GetExpressionTreeNode(Expression expression, string prefix = null, int? parentId = null)
         {
             ExpressionTreeNode node = null;
             if (expression is BinaryExpression)
@@ -104,19 +106,22 @@ namespace LINQapi.Helpers
             if (expression is MemberExpression)
             {
                 var expr = expression as MemberExpression;
-                node = new ExpressionTreeNode(string.Format("MemberExpression [{0}]: {1}", expr.Type.Name, expr.Member.Name));
+                node = new ExpressionTreeNode(string.Format("MemberExpression [{0}]: {1}", expr.Type.Name, expr.Member.Name),parentId);
+                node.Id = nextId();
             }
             if (expression is MemberInitExpression)
             {
                 var expr = expression as MemberInitExpression;
-                node = new ExpressionTreeNode(string.Format("MemberInitExpression [{0}]:", expr.NewExpression.Type));
-                expr.Bindings.ToList().ForEach(b => node.Nodes.Add(new ExpressionTreeNode(b.ToString())));
+                node = new ExpressionTreeNode(string.Format("MemberInitExpression [{0}]:", expr.NewExpression.Type), parentId);
+                node.Id = nextId();
+                expr.Bindings.ToList().ForEach(b => nodes.Add(new ExpressionTreeNode(b.ToString(), node.Id)));
             }
             if (expression is MethodCallExpression)
             {
                 var expr = expression as MethodCallExpression;
-                node = new ExpressionTreeNode(string.Format("MethodCallExpression [{0}] Arguments:", expr.Method.Name));
-                expr.Arguments.ToList().ForEach(a => node.Nodes.Add(GetExpressionTreeNode(a)));
+                node = new ExpressionTreeNode(string.Format("MethodCallExpression [{0}] Arguments:", expr.Method.Name), parentId);
+                node.Id = nextId();
+                expr.Arguments.ToList().ForEach(a => nodes.Add(GetExpressionTreeNode(a, parentId: node.Id)));
             }
             if (expression is NewArrayExpression)
             {
@@ -125,14 +130,16 @@ namespace LINQapi.Helpers
             if (expression is NewExpression)
             {
                 var expr = expression as NewExpression;
-                node = new ExpressionTreeNode(string.Format("NewExpression Arguments:"));
+                node = new ExpressionTreeNode(string.Format("NewExpression Arguments:"), parentId);
+                node.Id = nextId();
                 for (int i = 0; i < expr.Arguments.Count; i++)
-                    node.Nodes.Add(GetExpressionTreeNode(expr.Arguments[i], expr.Members[i].Name));
+                    nodes.Add(GetExpressionTreeNode(expr.Arguments[i], expr.Members[i].Name, node.Id));
             }
             if (expression is ParameterExpression)
             {
                 var expr = expression as ParameterExpression;
-                node = new ExpressionTreeNode(string.Format("TypeBinaryExpression [{0}]: {1}", expr.Type, expr.Name));
+                node = new ExpressionTreeNode(string.Format("TypeBinaryExpression [{0}]: {1}", expr.Type, expr.Name), parentId);
+                node.Id = nextId();
             }
             if (expression is RuntimeVariablesExpression)
             {
@@ -149,17 +156,22 @@ namespace LINQapi.Helpers
             if (expression is TypeBinaryExpression)
             {
                 var expr = expression as TypeBinaryExpression;
-                node = new ExpressionTreeNode(string.Format("TypeBinaryExpression [{0}] Oprand:", expr.TypeOperand));
-                node.Nodes.Add(GetExpressionTreeNode(expr.Expression));
+                node = new ExpressionTreeNode(string.Format("TypeBinaryExpression [{0}] Oprand:", expr.TypeOperand), parentId);
+                node.Id = nextId();
+                nodes.Add(GetExpressionTreeNode(expr.Expression, parentId: node.Id));
             }
             if (expression is UnaryExpression)
             {
                 var expr = expression as UnaryExpression;
-                node = new ExpressionTreeNode(string.Format("UnaryExpression [{0}] Oprand:", expr.NodeType));
-                node.Nodes.Add(GetExpressionTreeNode(expr.Operand));
+                node = new ExpressionTreeNode(string.Format("UnaryExpression [{0}] Oprand:", expr.NodeType), parentId);
+                node.Id = nextId();
+                nodes.Add(GetExpressionTreeNode(expr.Operand, parentId: node.Id));
             }
             if (node == null)
-                node = new ExpressionTreeNode(string.Format("Unkown Node [{0}-{1}]: {2}", expression.GetType().Name, expression.NodeType, expression));
+            {
+                node = new ExpressionTreeNode(string.Format("Unkown Node [{0}-{1}]: {2}", expression.GetType().Name, expression.NodeType, expression), parentId);
+                node.Id = nextId();
+            }
             if (prefix != null)
                 node.Text = string.Format("{0} => {1}", prefix, node.Text);
             node.ExpressionString = expression.ToString();
