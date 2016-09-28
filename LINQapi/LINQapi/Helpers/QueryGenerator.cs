@@ -24,6 +24,8 @@ namespace LINQapi.Helpers
             originalQueryFromWeb = queryFromWeb;
             generatedQuery = GenerateQuery();
             Expression = generatedQuery.Expression;
+            initialCount = db.ColectionSizes[originalQueryFromWeb.Split('.')[1]];
+
             var stopwatch = new Stopwatch();
             stopwatch.Start();
             var list = generatedQuery.ToList();
