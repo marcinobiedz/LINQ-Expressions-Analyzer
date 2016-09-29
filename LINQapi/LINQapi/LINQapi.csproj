@@ -98,14 +98,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Analyzer\ExpressionTreeNode.cs" />
+    <Compile Include="Analyzer\ExpressionTreeNodeComparer.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ExpTreeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\ClassGenerator.cs" />
-    <Compile Include="Helpers\QueryGenerator.cs" />
-    <Compile Include="Analyzer\ExpressionTreeAnalyzer.cs" />
+    <Compile Include="Helpers\QueryAnalyzer.cs" />
+    <Compile Include="Analyzer\ExpressionTreeVizualizer.cs" />
     <Compile Include="Helpers\MyDbSet.cs" />
     <Compile Include="Helpers\WebQueryValidator.cs" />
     <Compile Include="Models\Address.cs" />

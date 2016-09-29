@@ -6,7 +6,7 @@ using System.Text;
 
 namespace LINQapi.Helpers
 {
-    public class QueryGenerator
+    public class QueryAnalyzer
     {
         private string originalQueryFromWeb;
         private MyDbSet db;
@@ -18,11 +18,11 @@ namespace LINQapi.Helpers
         public int finalCount { get; }
         public long executionTime { get; }
 
-        public QueryGenerator(string queryFromWeb, MyDbSet db)
+        public QueryAnalyzer(string queryFromWeb, MyDbSet db)
         {
             this.db = db;
             originalQueryFromWeb = queryFromWeb;
-            generatedQuery = GenerateQuery();
+            generatedQuery = GenerateQueryFromString();
             Expression = generatedQuery.Expression;
             initialCount = db.ColectionSizes[originalQueryFromWeb.Split('.')[1]];
 
@@ -34,7 +34,7 @@ namespace LINQapi.Helpers
             executionTime = stopwatch.ElapsedMilliseconds;
         }
 
-        private IQueryable<object> GenerateQuery()
+        private IQueryable<object> GenerateQueryFromString()
         {
             // Create the class as usual
             sb.AppendLine("using System.Linq;");
