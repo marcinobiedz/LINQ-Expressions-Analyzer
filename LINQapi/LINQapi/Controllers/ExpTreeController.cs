@@ -11,10 +11,10 @@ namespace LINQapi.Controllers
         private MyDbSet db = new MyDbSet();
         private ExpressionTreeVizualizer expTreeVizualizer = new ExpressionTreeVizualizer();
 
-        public TreeResponseModel Get([FromBody] string expression)
+        public TreeResponseModel Get([FromBody] string fromWeb)
         {
             //===============================================
-            string fromWeb = "db.Customers.AsQQQueryable().Where(cus => cus.CustomerID > 5 && cus.FirstName.StartsWith(\"Kat\")).Take(5).Select(cus => new { cus.EmailAddress })";
+            //string fromWeb = "db.Customers.AsQueryable().Where(cus => cus.CustomerID > 5 && cus.FirstName.StartsWith(\"Kat\")).Take(5).Select(cus => new { cus.EmailAddress })";
             //============================================
 
             TreeResponseModel response = new TreeResponseModel();
@@ -35,7 +35,6 @@ namespace LINQapi.Controllers
                     response.initialCount = queryAna.initialCount;
                     response.finalCount = queryAna.finalCount;
                     response.executionTime = queryAna.executionTime;
-                    response.stringExpression = queryAna.Expression.ToString();
                     response.isResponseValid = true;
                 }
             }

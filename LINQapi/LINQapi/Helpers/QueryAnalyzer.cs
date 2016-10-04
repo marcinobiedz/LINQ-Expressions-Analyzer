@@ -34,8 +34,8 @@ namespace LINQapi.Helpers
                 var list = generatedQuery.ToList();
                 stopwatch.Stop();
                 finalCount = list.Count;
-                executionTime = stopwatch.ElapsedMilliseconds;
-                //executionTime = stopwatch.ElapsedTicks;
+                //executionTime = stopwatch.ElapsedMilliseconds;
+                executionTime = stopwatch.ElapsedTicks;
             }
         }
 

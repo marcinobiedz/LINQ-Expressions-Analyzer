@@ -16,9 +16,6 @@ namespace LINQapi.Models
             errors = new List<string>();
         }
 
-        [DataMember]
-        public string stringExpression { get; set; }
-
         [DataMember(IsRequired = true)]
         public bool isResponseValid { get; set; }
 
