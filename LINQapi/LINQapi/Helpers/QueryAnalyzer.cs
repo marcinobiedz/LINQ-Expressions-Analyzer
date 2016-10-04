@@ -24,16 +24,19 @@ namespace LINQapi.Helpers
         {
             this.db = db;
             originalQueryFromWeb = queryFromWeb;
-            generatedQuery = GenerateQueryFromString();
-            Expression = generatedQuery.Expression;
             initialCount = db.ColectionSizes[originalQueryFromWeb.Split('.')[1]];
-
-            var stopwatch = new Stopwatch();
-            stopwatch.Start();
-            var list = generatedQuery.ToList();
-            stopwatch.Stop();
-            finalCount = list.Count;
-            executionTime = stopwatch.ElapsedMilliseconds;
+            generatedQuery = GenerateQueryFromString();
+            if (errors.Count == 0)
+            {
+                Expression = generatedQuery.Expression;
+                var stopwatch = new Stopwatch();
+                stopwatch.Start();
+                var list = generatedQuery.ToList();
+                stopwatch.Stop();
+                finalCount = list.Count;
+                executionTime = stopwatch.ElapsedMilliseconds;
+                //executionTime = stopwatch.ElapsedTicks;
+            }
         }
 
         private IQueryable<object> GenerateQueryFromString()
@@ -62,7 +65,7 @@ namespace LINQapi.Helpers
             {
                 foreach (CompilerError error in (CompilerErrorCollection)classRef)
                 {
-                    errors.Add(string.Format("{0}:{1} {2} {3}", error.Line, error.Column, error.ErrorNumber, error.ErrorText));
+                    errors.Add(error.ErrorText);
                 }
                 return null;
             }

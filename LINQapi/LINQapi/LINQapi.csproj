@@ -113,7 +113,6 @@
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ProductCategory.cs" />
-    <Compile Include="Models\QueryAnalyzerModel.cs" />
     <Compile Include="Models\SalesOrderDetail.cs" />
     <Compile Include="Models\SalesOrderHeader.cs" />
     <Compile Include="Models\TreeResponseModel.cs" />

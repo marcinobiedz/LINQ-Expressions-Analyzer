@@ -14,10 +14,10 @@ namespace LINQapi.Controllers
         public TreeResponseModel Get([FromBody] string expression)
         {
             //===============================================
-            string fromWeb = "db.Cuuuustomers.AsQueryable().Where(cus => cus.CustomerID > 5 && cus.FirstName.StartsWith(\"Kat\")).Take(5).Select(cus => new { cus.EmailAddress })";
+            string fromWeb = "db.Customers.AsQQQueryable().Where(cus => cus.CustomerID > 5 && cus.FirstName.StartsWith(\"Kat\")).Take(5).Select(cus => new { cus.EmailAddress })";
             //============================================
 
-            TreeResponseModel response = new TreeResponseModel();            
+            TreeResponseModel response = new TreeResponseModel();
             WebQueryValidator queryValidator = new WebQueryValidator(fromWeb, db);
             if (queryValidator.isValid)
             {
@@ -32,7 +32,10 @@ namespace LINQapi.Controllers
                     expTreeVizualizer.GetExpressionTreeNode(queryAna.Expression);
                     response.tree = expTreeVizualizer.nodes;
                     response.tree.Sort(new ExpressionTreeNodeComparer());
-
+                    response.initialCount = queryAna.initialCount;
+                    response.finalCount = queryAna.finalCount;
+                    response.executionTime = queryAna.executionTime;
+                    response.stringExpression = queryAna.Expression.ToString();
                     response.isResponseValid = true;
                 }
             }
