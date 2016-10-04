@@ -1,8 +1,8 @@
 ﻿using LINQapi.Analyzer;
 using LINQapi.Helpers;
 using LINQapi.Models;
-using System.Collections.Generic;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace LINQapi.Controllers
 {
@@ -11,13 +11,21 @@ namespace LINQapi.Controllers
         private MyDbSet db = new MyDbSet();
         private ExpressionTreeVizualizer expTreeVizualizer = new ExpressionTreeVizualizer();
 
-        public TreeResponseModel Get([FromBody] string fromWeb)
+        [EnableCors(origins: "http://localhost:63342", headers: "*", methods: "*")]
+        [HttpPost]
+        public TreeResponseModel Post([FromBody] string fromWeb)
         {
             //===============================================
             //string fromWeb = "db.Customers.AsQueryable().Where(cus => cus.CustomerID > 5 && cus.FirstName.StartsWith(\"Kat\")).Take(5).Select(cus => new { cus.EmailAddress })";
             //============================================
 
             TreeResponseModel response = new TreeResponseModel();
+            if (string.IsNullOrEmpty(fromWeb) || string.IsNullOrWhiteSpace(fromWeb))
+            {
+                response.isResponseValid = false;
+                response.errors.Add("You did not typed any LINQ expression :(");
+                return response;
+            }
             WebQueryValidator queryValidator = new WebQueryValidator(fromWeb, db);
             if (queryValidator.isValid)
             {

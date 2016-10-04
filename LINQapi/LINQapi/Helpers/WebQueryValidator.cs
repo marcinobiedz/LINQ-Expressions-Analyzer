@@ -14,7 +14,7 @@ namespace LINQapi.Helpers
         private bool validateQuery(string query)
         {
             string[] queryParts = query.Split('.');
-            if (queryParts.Length <= 0) return false;
+            if (queryParts.Length < 2) return false;
             queryParts[0] = "db";
             if (!(db.ColectionSizes.Keys.Contains(queryParts[1]))) return false;
             return true;
