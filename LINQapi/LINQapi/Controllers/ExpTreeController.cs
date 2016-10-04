@@ -1,5 +1,6 @@
 ﻿using LINQapi.Analyzer;
 using LINQapi.Helpers;
+using LINQapi.Models;
 using System.Collections.Generic;
 using System.Web.Http;
 
@@ -10,24 +11,37 @@ namespace LINQapi.Controllers
         private MyDbSet db = new MyDbSet();
         private ExpressionTreeVizualizer expTreeVizualizer = new ExpressionTreeVizualizer();
 
-        public List<ExpressionTreeNode> Get([FromBody] string expression)
+        public TreeResponseModel Get([FromBody] string expression)
         {
-            List<ExpressionTreeNode> tree = new List<ExpressionTreeNode>();
-            string fromWeb = "db.Customers.AsQueryable().Where(cus => cus.CustomerID > 5 && cus.FirstName.StartsWith(\"Kat\")).Take(5).Select(cus => new { cus.EmailAddress })";
+            //===============================================
+            string fromWeb = "db.Cuuuustomers.AsQueryable().Where(cus => cus.CustomerID > 5 && cus.FirstName.StartsWith(\"Kat\")).Take(5).Select(cus => new { cus.EmailAddress })";
             //============================================
-            var queryValidator = new WebQueryValidator(fromWeb, db);
+
+            TreeResponseModel response = new TreeResponseModel();            
+            WebQueryValidator queryValidator = new WebQueryValidator(fromWeb, db);
             if (queryValidator.isValid)
             {
-                var queryAna = new QueryAnalyzer(fromWeb, db);
-                expTreeVizualizer.GetExpressionTreeNode(queryAna.Expression);
-                tree = expTreeVizualizer.nodes;
-                tree.Sort(new ExpressionTreeNodeComparer());
+                QueryAnalyzer queryAna = new QueryAnalyzer(fromWeb, db);
+                if (queryAna.errors.Count > 0)
+                {
+                    response.isResponseValid = false;
+                    response.errors = queryAna.errors;
+                }
+                else
+                {
+                    expTreeVizualizer.GetExpressionTreeNode(queryAna.Expression);
+                    response.tree = expTreeVizualizer.nodes;
+                    response.tree.Sort(new ExpressionTreeNodeComparer());
+
+                    response.isResponseValid = true;
+                }
             }
             else
             {
-
+                response.isResponseValid = queryValidator.isValid;
+                response.errors.Add("There is no such table in the database! :(");
             }
-            return tree;
+            return response;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.CodeDom.Compiler;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
@@ -17,6 +18,7 @@ namespace LINQapi.Helpers
         public int initialCount { get; }
         public int finalCount { get; }
         public long executionTime { get; }
+        public List<string> errors = new List<string>();
 
         public QueryAnalyzer(string queryFromWeb, MyDbSet db)
         {
@@ -58,15 +60,13 @@ namespace LINQapi.Helpers
             // If the compilation process returned an error, then show to the user all errors
             if (classRef is CompilerErrorCollection)
             {
-                StringBuilder sberror = new StringBuilder();
                 foreach (CompilerError error in (CompilerErrorCollection)classRef)
                 {
-                    sberror.AppendLine(string.Format("{0}:{1} {2} {3}",
-                                       error.Line, error.Column, error.ErrorNumber, error.ErrorText));
+                    errors.Add(string.Format("{0}:{1} {2} {3}", error.Line, error.Column, error.ErrorNumber, error.ErrorText));
                 }
                 return null;
             }
-            IQueryable<object> targetValues = classRef.result(this.db);
+            IQueryable<object> targetValues = classRef.result(db);
             return targetValues;
         }
     }
