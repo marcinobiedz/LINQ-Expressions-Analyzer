@@ -29,6 +29,7 @@ namespace LINQapi.Controllers
             WebQueryValidator queryValidator = new WebQueryValidator(fromWeb, db);
             if (queryValidator.isValid)
             {
+                fromWeb = queryValidator.appendQuery(fromWeb);
                 QueryAnalyzer queryAna = new QueryAnalyzer(fromWeb, db);
                 if (queryAna.errors.Count > 0)
                 {
