@@ -164,14 +164,14 @@ namespace LINQapi.Helpers
             if (expression is TypeBinaryExpression)
             {
                 var expr = expression as TypeBinaryExpression;
-                node = new ExpressionTreeNode(string.Format("TypeBinaryExpression [{0}] Oprand:", expr.TypeOperand), parentId);
+                node = new ExpressionTreeNode(string.Format("TypeBinaryExpression [{0}] Operand:", expr.TypeOperand), parentId);
                 node.Id = nextId();
                 GetExpressionTreeNode(expr.Expression, parentId: node.Id);
             }
             if (expression is UnaryExpression)
             {
                 var expr = expression as UnaryExpression;
-                node = new ExpressionTreeNode(string.Format("UnaryExpression [{0}] Oprand:", expr.NodeType), parentId);
+                node = new ExpressionTreeNode(string.Format("UnaryExpression [{0}] Operand:", expr.NodeType), parentId);
                 node.Id = nextId();
                 GetExpressionTreeNode(expr.Operand, parentId: node.Id);
             }
