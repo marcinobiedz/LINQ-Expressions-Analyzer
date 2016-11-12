@@ -116,6 +116,7 @@
     <Compile Include="Helpers\QueryAnalyzer.cs" />
     <Compile Include="Analyzer\ExpressionTreeVizualizer.cs" />
     <Compile Include="Helpers\MyDbSet.cs" />
+    <Compile Include="Helpers\MyQuery.cs" />
     <Compile Include="Helpers\WebQueryValidator.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\Customer.cs" />
