@@ -113,10 +113,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\ClassGenerator.cs" />
+    <Compile Include="Helpers\Constants.cs" />
     <Compile Include="Helpers\QueryAnalyzer.cs" />
     <Compile Include="Analyzer\ExpressionTreeVizualizer.cs" />
     <Compile Include="Helpers\MyDbSet.cs" />
-    <Compile Include="Helpers\MyQuery.cs" />
     <Compile Include="Helpers\WebQueryValidator.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\Customer.cs" />

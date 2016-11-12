@@ -13,43 +13,59 @@ namespace LINQapi.Helpers
         private MyDbSet db;
         private StringBuilder sb = new StringBuilder();
         private ClassGenerator classGen = new ClassGenerator();
-        private IQueryable<object> generatedQuery;
+        private IQueryable<object>[] generatedQueries;
         public Expression Expression { get; }
-        public int initialCount { get; }
-        public int finalCount { get; }
-        public long executionTime { get; }
+        public int[] initialCounts { get; }
+        public int[] finalCounts { get; }
+        public long[] executionTimes { get; }
         public List<string> errors = new List<string>();
 
         public QueryAnalyzer(string queryFromWeb, MyDbSet db)
         {
             this.db = db;
             originalQueryFromWeb = queryFromWeb;
-            initialCount = db.ColectionSizes[originalQueryFromWeb.Split('.')[1]];
-            generatedQuery = GenerateQueryFromString();
+            generatedQueries = GenerateQueryFromString();
             if (errors.Count == 0)
             {
-                Expression = generatedQuery.Expression;
-                var stopwatch = new Stopwatch();
-                stopwatch.Start();
-                var list = generatedQuery.ToList();
-                stopwatch.Stop();
-                finalCount = list.Count;
-                //executionTime = stopwatch.ElapsedMilliseconds;
-                executionTime = stopwatch.ElapsedTicks;
+                Expression = generatedQueries[0].Expression;
+                initialCounts = new int[Constants.DB_DIVIDER];
+                executionTimes = new long[Constants.DB_DIVIDER];
+                finalCounts = new int[Constants.DB_DIVIDER];
+                var overallTableSize = db.ColectionSizes[originalQueryFromWeb.Split('.')[1]];
+                for (int i = 0; i < Constants.DB_DIVIDER; i++)
+                {
+                    initialCounts[i] = (overallTableSize * (i + 1)) / Constants.DB_DIVIDER;
+                    var stopwatch = new Stopwatch();
+                    stopwatch.Start();
+                    var list = generatedQueries[i].ToList();
+                    stopwatch.Stop();
+                    finalCounts[i] = list.Count;
+                    executionTimes[i] = stopwatch.ElapsedTicks;
+                }
             }
         }
 
-        private IQueryable<object> GenerateQueryFromString()
+        private IQueryable<object>[] GenerateQueryFromString()
         {
+            var tableName = originalQueryFromWeb.Split('.')[1];
+            var modifiedQueryFromWeb = originalQueryFromWeb.Substring(originalQueryFromWeb.IndexOf('.', 3));
             // Create the class as usual
             sb.AppendLine("using System.Linq;");
             sb.AppendLine("namespace LINQapi.Helpers");
             sb.AppendLine("{");
             sb.AppendLine("      public class MyQuery");
             sb.AppendLine("      {");
-            sb.AppendLine("            public IQueryable<object> result(MyDbSet db)");
+            sb.AppendLine("            public IQueryable<object>[] result(MyDbSet db)");
             sb.AppendLine("            {");
-            sb.AppendLine("                 return " + originalQueryFromWeb + ";");
+            sb.AppendLine("                 IQueryable<object>[] expressionsSet = new IQueryable<object>[" + Constants.DB_DIVIDER + "];");
+            sb.AppendLine("                 for (int i = 0; i < " + Constants.DB_DIVIDER + "; i++)");
+            sb.AppendLine("                 {");
+            sb.AppendLine("                     int counter = (db." + tableName + ".Count * (i + 1)) / " + Constants.DB_DIVIDER + ";");
+            sb.AppendLine("                     var temp = db." + tableName + ".Take(counter);");
+            sb.AppendLine("                     var exp = temp" + modifiedQueryFromWeb + ";");
+            sb.AppendLine("                     expressionsSet[i] = exp;");
+            sb.AppendLine("                 }");
+            sb.AppendLine("                 return expressionsSet;");
             sb.AppendLine("            }");
             sb.AppendLine("      }");
             sb.AppendLine("}");
@@ -69,7 +85,7 @@ namespace LINQapi.Helpers
                 }
                 return null;
             }
-            IQueryable<object> targetValues = classRef.result(db);
+            IQueryable<object>[] targetValues = classRef.result(db);
             return targetValues;
         }
     }

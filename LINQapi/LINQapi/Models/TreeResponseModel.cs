@@ -26,12 +26,12 @@ namespace LINQapi.Models
         public List<ExpressionTreeNode> tree { get; set; }
 
         [DataMember]
-        public int initialCount { get; set; }
+        public int[] initialCounts { get; set; }
 
         [DataMember]
-        public int finalCount { get; set; }
+        public int[] finalCounts { get; set; }
 
         [DataMember]
-        public long executionTime { get; set; }
+        public long[] executionTimes { get; set; }
     }
 }
