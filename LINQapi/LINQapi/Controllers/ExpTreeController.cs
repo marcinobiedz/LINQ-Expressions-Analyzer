@@ -1,6 +1,7 @@
 ﻿using LINQapi.Analyzer;
 using LINQapi.Helpers;
 using LINQapi.Models;
+using LINQapi.Tests;
 using System.Web.Http;
 using System.Web.Http.Cors;
 
@@ -18,6 +19,7 @@ namespace LINQapi.Controllers
             //===============================================
             //string fromWeb = "db.Customers.AsQueryable().Where(cus => cus.CustomerID > 5 && cus.FirstName.StartsWith(\"Kat\")).Take(5).Select(cus => new { cus.EmailAddress })";
             //============================================
+            TestPlayground tp = new TestPlayground();
 
             TreeResponseModel response = new TreeResponseModel();
             if (string.IsNullOrEmpty(fromWeb) || string.IsNullOrWhiteSpace(fromWeb))

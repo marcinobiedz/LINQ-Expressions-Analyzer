@@ -13,7 +13,7 @@ namespace LINQapi.Helpers
         private MyDbSet db;
         private StringBuilder sb = new StringBuilder();
         private ClassGenerator classGen = new ClassGenerator();
-        private IQueryable<object>[] generatedQueries;
+        private IQueryable[] generatedQueries;
         public Expression Expression { get; }
         public int[] initialCounts { get; }
         public int[] finalCounts { get; }
@@ -45,7 +45,7 @@ namespace LINQapi.Helpers
             }
         }
 
-        private IQueryable<object>[] GenerateQueryFromString()
+        private IQueryable[] GenerateQueryFromString()
         {
             var tableName = originalQueryFromWeb.Split('.')[1];
             var modifiedQueryFromWeb = originalQueryFromWeb.Substring(originalQueryFromWeb.IndexOf('.', 3));
@@ -55,13 +55,13 @@ namespace LINQapi.Helpers
             sb.AppendLine("{");
             sb.AppendLine("      public class MyQuery");
             sb.AppendLine("      {");
-            sb.AppendLine("            public IQueryable<object>[] result(MyDbSet db)");
+            sb.AppendLine("            public IQueryable[] result(MyDbSet db)");
             sb.AppendLine("            {");
-            sb.AppendLine("                 IQueryable<object>[] expressionsSet = new IQueryable<object>[" + Constants.DB_DIVIDER + "];");
+            sb.AppendLine("                 IQueryable[] expressionsSet = new IQueryable[" + Constants.DB_DIVIDER + "];");
             sb.AppendLine("                 for (int i = 0; i < " + Constants.DB_DIVIDER + "; i++)");
             sb.AppendLine("                 {");
             sb.AppendLine("                     int counter = (db." + tableName + ".Count * (i + 1)) / " + Constants.DB_DIVIDER + ";");
-            sb.AppendLine("                     var temp = db." + tableName + ".Take(counter);");
+            sb.AppendLine("                     var temp = db." + tableName + ".Take(counter).ToList();");
             sb.AppendLine("                     var exp = temp" + modifiedQueryFromWeb + ";");
             sb.AppendLine("                     expressionsSet[i] = exp;");
             sb.AppendLine("                 }");
@@ -85,7 +85,7 @@ namespace LINQapi.Helpers
                 }
                 return null;
             }
-            IQueryable<object>[] targetValues = classRef.result(db);
+            IQueryable[] targetValues = classRef.result(db);
             return targetValues;
         }
     }
