@@ -17,7 +17,12 @@ namespace LINQapi.Controllers
         public TreeResponseModel Post([FromBody] string fromWeb)
         {
             //===============================================
-            //string fromWeb = "db.Customers.AsQueryable().Where(cus => cus.CustomerID > 5 && cus.FirstName.StartsWith(\"Kat\")).Take(5).Select(cus => new { cus.EmailAddress })";
+            fromWeb = "db.SalesOrderDetails.Join(db.SalesOrderHeaders," +
+            "sod => sod.SalesOrderID," +
+            "soh => soh.SalesOrderID," +
+            "(sod, soh) => new { ID = sod.SalesOrderDetailID, An = soh.AccountNumber })" +
+            ".Where(obj => obj.An.StartsWith(\"10-4020-0002\"))" +
+            ".Select(sel => sel.ID)";
             //============================================
             TestPlayground tp = new TestPlayground();
 

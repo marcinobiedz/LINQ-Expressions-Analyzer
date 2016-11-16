@@ -99,7 +99,12 @@ namespace LINQapi.Helpers
             if (expression is LambdaExpression)
             {
                 var expr = expression as LambdaExpression;
-                node = new ExpressionTreeNode(string.Format("LambdaExpression [{0}] Body:", expr.ReturnType), parentId);
+                string parameters = "";
+                for (var i = 0; i < expr.Parameters.Count; i++)
+                {
+                    parameters = string.Join(", ", expr.Parameters.Select(p => p.Name + ": " + p.Type.Name).ToArray());
+                }
+                node = new ExpressionTreeNode(string.Format("Lambda [{0}], Params: [{1}]:", expr.ReturnType, parameters), parentId);
                 node.Id = nextId();
                 GetExpressionTreeNode(expr.Body, parentId: node.Id);
             }

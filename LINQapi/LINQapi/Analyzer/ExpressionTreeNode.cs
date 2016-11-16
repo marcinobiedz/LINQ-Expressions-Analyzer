@@ -11,7 +11,7 @@ namespace LINQapi.Analyzer
     {
         public ExpressionTreeNode(string text, int? parentId = null)
         {
-            Text = text;
+            Text = cleanNodeText(text);
             ParentId = parentId;
         }
 
@@ -26,5 +26,14 @@ namespace LINQapi.Analyzer
 
         [DataMember]
         public string ExpressionString { get; set; }
+
+        private string cleanNodeText(string text)
+        {
+            text = text.Replace("System.Collections.Generic.List`1", "");
+            text = text.Replace("`1", "");
+            text = text.Replace("<>f__AnonymousType0`2", "AnonymousType");
+
+            return text;
+        }
     }
 }
