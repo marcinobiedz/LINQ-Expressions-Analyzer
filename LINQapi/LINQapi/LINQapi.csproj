@@ -108,8 +108,10 @@
     <Compile Include="Analyzer\ExpressionTreeNode.cs" />
     <Compile Include="Analyzer\ExpressionTreeNodeComparer.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\ExpChartController.cs" />
     <Compile Include="Controllers\ExpTreeController.cs" />
     <Compile Include="Helpers\ListHelper.cs" />
+    <Compile Include="Models\ChartResponseModel.cs" />
     <Compile Include="Tests\TestPlayground.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

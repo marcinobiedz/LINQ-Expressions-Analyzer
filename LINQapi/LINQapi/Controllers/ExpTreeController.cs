@@ -48,9 +48,6 @@ namespace LINQapi.Controllers
                     expTreeVizualizer.GetExpressionTreeNode(queryAna.Expression);
                     response.tree = expTreeVizualizer.nodes;
                     response.tree.Sort(new ExpressionTreeNodeComparer());
-                    response.initialCounts = queryAna.initialCounts;
-                    response.finalCounts = queryAna.finalCounts;
-                    response.executionTimes = queryAna.executionTimes;
                     response.isResponseValid = true;
                 }
             }
