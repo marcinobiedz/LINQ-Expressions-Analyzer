@@ -11,8 +11,16 @@ namespace LINQapi.Analyzer
     {
         public ExpressionTreeNode(string text, int? parentId = null)
         {
-            Text = cleanNodeText(text);
+            Text = cleanText(text);
             ParentId = parentId;
+            NodeText = "";
+        }
+
+        public ExpressionTreeNode(string text, string nodeText, int? parentId = null)
+        {
+            Text = cleanText(text);
+            ParentId = parentId;
+            NodeText = cleanNode(cleanText(nodeText));
         }
 
         [DataMember]
@@ -25,9 +33,23 @@ namespace LINQapi.Analyzer
         public string Text { get; set; }
 
         [DataMember]
+        public string NodeText { get; set; }
+
+        [DataMember]
         public string ExpressionString { get; set; }
 
-        private string cleanNodeText(string text)
+        private string cleanNode(string nodeText)
+        {
+            if (nodeText.StartsWith("[") && nodeText.EndsWith("]"))
+            {
+                nodeText = nodeText.TrimStart('[');
+                nodeText = nodeText.TrimEnd(']');
+                return "List: " + nodeText;
+            }
+            return nodeText;
+        }
+
+        private string cleanText(string text)
         {
             text = text.Replace("System.Collections.Generic.List`1", "");
             text = text.Replace("`1", "");

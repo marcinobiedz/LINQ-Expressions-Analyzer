@@ -53,7 +53,9 @@ namespace LINQapi.Helpers
             if (expression is ConstantExpression)
             {
                 var expr = expression as ConstantExpression;
-                node = new ExpressionTreeNode(string.Format("ConstantExpression [{0}]: {1}", expr.Type.Name, expr.Value), parentId);
+                node = new ExpressionTreeNode(string.Format("ConstantExpression [{0}]: {1}", expr.Type.Name, expr.Value),
+                    expr.Value.ToString(),
+                    parentId);
                 node.Id = nextId();
             }
             if (expression is DebugInfoExpression)
@@ -98,13 +100,17 @@ namespace LINQapi.Helpers
             }
             if (expression is LambdaExpression)
             {
+                //Extended node
                 var expr = expression as LambdaExpression;
-                string parameters = "";
+                string parameters = "", nodeText = "";
                 for (var i = 0; i < expr.Parameters.Count; i++)
                 {
                     parameters = string.Join(", ", expr.Parameters.Select(p => p.Name + ": " + p.Type.Name).ToArray());
+                    nodeText = string.Join(", ", expr.Parameters.Select(p => p.Name).ToArray());
                 }
-                node = new ExpressionTreeNode(string.Format("Lambda [{0}], Params: [{1}]:", expr.ReturnType, parameters), parentId);
+                node = new ExpressionTreeNode(string.Format("Lambda [{0}], Params: [{1}]:", expr.ReturnType, parameters),
+                    nodeText + " =>",
+                    parentId);
                 node.Id = nextId();
                 GetExpressionTreeNode(expr.Body, parentId: node.Id);
             }
@@ -119,7 +125,11 @@ namespace LINQapi.Helpers
             if (expression is MemberExpression)
             {
                 var expr = expression as MemberExpression;
-                node = new ExpressionTreeNode(string.Format("MemberExpression [{0}]: {1}", expr.Type.Name, expr.Member.Name), parentId);
+                node = new ExpressionTreeNode(string.Format("MemberExpression [{0}]: {1}",
+                        expr.Type.Name,
+                        expr.Expression.ToString() + "." + expr.Member.Name),
+                    expr.Expression.ToString() + "." + expr.Member.Name,
+                    parentId);
                 node.Id = nextId();
             }
             if (expression is MemberInitExpression)
@@ -131,8 +141,11 @@ namespace LINQapi.Helpers
             }
             if (expression is MethodCallExpression)
             {
+                //Extended node
                 var expr = expression as MethodCallExpression;
-                node = new ExpressionTreeNode(string.Format("MethodCallExpression [{0}] Arguments:", expr.Method.Name), parentId);
+                node = new ExpressionTreeNode(string.Format("MethodCallExpression [{0}] Arguments:", expr.Method.Name),
+                    expr.Method.Name,
+                    parentId);
                 node.Id = nextId();
                 expr.Arguments.ToList().ForEach(a => GetExpressionTreeNode(a, parentId: node.Id));
             }
