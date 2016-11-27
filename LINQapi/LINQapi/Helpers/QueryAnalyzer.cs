@@ -1,4 +1,5 @@
-﻿using System.CodeDom.Compiler;
+﻿using LINQapi.Models;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -19,6 +20,7 @@ namespace LINQapi.Helpers
         public int[] finalCounts { get; }
         public long[] executionTimes { get; }
         public List<string> errors = new List<string>();
+        public TableInfoModel[] tablesInfo { get; }
 
         public QueryAnalyzer(string queryFromWeb, MyDbSet db)
         {
@@ -42,6 +44,7 @@ namespace LINQapi.Helpers
                     finalCounts[i] = list.Count;
                     executionTimes[i] = stopwatch.ElapsedTicks;
                 }
+                tablesInfo = db.ColectionSizes.Select(col => new TableInfoModel(col.Key, col.Value)).ToArray();
             }
         }
 

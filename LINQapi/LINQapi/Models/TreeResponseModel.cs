@@ -33,5 +33,8 @@ namespace LINQapi.Models
 
         [DataMember]
         public long[] executionTimes { get; set; }
+
+        [DataMember]
+        public TableInfoModel[] tablesInfo { get; set; }
     }
 }

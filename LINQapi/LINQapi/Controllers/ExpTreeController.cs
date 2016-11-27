@@ -51,6 +51,7 @@ namespace LINQapi.Controllers
                     response.initialCounts = queryAna.initialCounts;
                     response.finalCounts = queryAna.finalCounts;
                     response.executionTimes = queryAna.executionTimes;
+                    response.tablesInfo = queryAna.tablesInfo;
                     response.isResponseValid = true;
                 }
             }

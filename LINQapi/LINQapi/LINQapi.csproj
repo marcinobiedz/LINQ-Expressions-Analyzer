@@ -110,6 +110,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ExpTreeController.cs" />
     <Compile Include="Helpers\ListHelper.cs" />
+    <Compile Include="Models\TableInfoModel.cs" />
     <Compile Include="Tests\TestPlayground.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
