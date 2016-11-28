@@ -164,7 +164,7 @@ namespace LINQapi.Helpers
             if (expression is ParameterExpression)
             {
                 var expr = expression as ParameterExpression;
-                node = new ExpressionTreeNode(string.Format("TypeBinaryExpression [{0}]: {1}", expr.Type, expr.Name), parentId);
+                node = new ExpressionTreeNode(string.Format("ParameterExpression [{0}]: {1}", expr.Type, expr.Name),expr.Name, parentId);
                 node.Id = nextId();
             }
             if (expression is RuntimeVariablesExpression)

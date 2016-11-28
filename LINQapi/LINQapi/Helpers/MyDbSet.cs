@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace LINQapi.Helpers
 {
@@ -14,28 +15,31 @@ namespace LINQapi.Helpers
         public List<ProductCategory> ProductCategories { get; }
         public List<SalesOrderDetail> SalesOrderDetails { get; }
         public List<SalesOrderHeader> SalesOrderHeaders { get; }
+        public List<int> Numbers { get; }
         public Dictionary<string, int> ColectionSizes = new Dictionary<string, int>();
 
         public MyDbSet()
         {
-            this.Addresses = new List<Address>();
-            this.setAddresses();
-            this.Customers = new List<Customer>();
-            this.setCustomers();
-            this.Products = new List<Product>();
-            this.setProducts();
-            this.ProductCategories = new List<ProductCategory>();
-            this.setProductCategories();
-            this.SalesOrderDetails = new List<SalesOrderDetail>();
-            this.setSalesOrderDetails();
-            this.SalesOrderHeaders = new List<SalesOrderHeader>();
-            this.setSalesOrderHeaders();
+            Addresses = new List<Address>();
+            setAddresses();
+            Customers = new List<Customer>();
+            setCustomers();
+            Products = new List<Product>();
+            setProducts();
+            ProductCategories = new List<ProductCategory>();
+            setProductCategories();
+            SalesOrderDetails = new List<SalesOrderDetail>();
+            setSalesOrderDetails();
+            SalesOrderHeaders = new List<SalesOrderHeader>();
+            setSalesOrderHeaders();
+            Numbers = Enumerable.Range(0, 1000000).ToList();
             ColectionSizes.Add("Addresses", Addresses.Count);
             ColectionSizes.Add("Customers", Customers.Count);
             ColectionSizes.Add("Products", Products.Count);
             ColectionSizes.Add("ProductCategories", ProductCategories.Count);
             ColectionSizes.Add("SalesOrderDetails", SalesOrderDetails.Count);
             ColectionSizes.Add("SalesOrderHeaders", SalesOrderHeaders.Count);
+            ColectionSizes.Add("Numbers", Numbers.Count);
         }
 
         private void setSalesOrderHeaders()
