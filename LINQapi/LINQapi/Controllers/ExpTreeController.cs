@@ -1,7 +1,6 @@
 ﻿using LINQapi.Analyzer;
 using LINQapi.Helpers;
 using LINQapi.Models;
-using LINQapi.Tests;
 using System.Web.Http;
 using System.Web.Http.Cors;
 
@@ -17,15 +16,8 @@ namespace LINQapi.Controllers
         public TreeResponseModel Post([FromBody] string fromWeb)
         {
             //===============================================
-            fromWeb = "db.SalesOrderDetails.Join(db.SalesOrderHeaders," +
-            "sod => sod.SalesOrderID," +
-            "soh => soh.SalesOrderID," +
-            "(sod, soh) => new { ID = sod.SalesOrderDetailID, An = soh.AccountNumber })" +
-            ".Where(obj => obj.An.StartsWith(\"10-4020-0002\"))" +
-            ".Select(sel => sel.ID)";
+            fromWeb = Constants.FROM_WEB;
             //============================================
-            TestPlayground tp = new TestPlayground();
-
             TreeResponseModel response = new TreeResponseModel();
             if (string.IsNullOrEmpty(fromWeb) || string.IsNullOrWhiteSpace(fromWeb))
             {
@@ -45,13 +37,10 @@ namespace LINQapi.Controllers
                 }
                 else
                 {
+                    queryAna.AnalyzeTree();
                     expTreeVizualizer.GetExpressionTreeNode(queryAna.Expression);
                     response.tree = expTreeVizualizer.nodes;
                     response.tree.Sort(new ExpressionTreeNodeComparer());
-                    response.initialCounts = queryAna.initialCounts;
-                    response.finalCounts = queryAna.finalCounts;
-                    response.executionTimes = queryAna.executionTimes;
-                    response.tablesInfo = queryAna.tablesInfo;
                     response.isResponseValid = true;
                 }
             }

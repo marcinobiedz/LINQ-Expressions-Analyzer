@@ -15,21 +15,30 @@ namespace LINQapi.Helpers
         private StringBuilder sb = new StringBuilder();
         private ClassGenerator classGen = new ClassGenerator();
         private IQueryable[] generatedQueries;
-        public Expression Expression { get; }
-        public int[] initialCounts { get; }
-        public int[] finalCounts { get; }
-        public long[] executionTimes { get; }
+        public Expression Expression { get; private set; }
+        public int[] initialCounts { get; private set; }
+        public int[] finalCounts { get; private set; }
+        public long[] executionTimes { get; private set; }
         public List<string> errors = new List<string>();
-        public TableInfoModel[] tablesInfo { get; }
+        public TableInfoModel[] tablesInfo { get; private set; }
 
         public QueryAnalyzer(string queryFromWeb, MyDbSet db)
         {
             this.db = db;
             originalQueryFromWeb = queryFromWeb;
             generatedQueries = GenerateQueryFromString();
+        }
+
+        public void AnalyzeTree()
+        {
+            if (errors.Count == 0)
+                Expression = generatedQueries[0].Expression;
+        }
+
+        public void AnalyzeChart()
+        {
             if (errors.Count == 0)
             {
-                Expression = generatedQueries[0].Expression;
                 initialCounts = new int[Constants.DB_DIVIDER];
                 executionTimes = new long[Constants.DB_DIVIDER];
                 finalCounts = new int[Constants.DB_DIVIDER];
