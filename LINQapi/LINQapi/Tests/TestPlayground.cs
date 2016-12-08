@@ -8,8 +8,7 @@ namespace LINQapi.Tests
     {
         public TestPlayground()
         {
-            MyDbSet db = new MyDbSet();
-            var a = db.SalesOrderDetails.Where(sod => sod.Product.ProductNumber.StartsWith("aaa")).Select(ob=>ob.UnitPrice);
+            var a = Constants.db.SalesOrderDetails.Where(sod => sod.Product.ProductNumber.StartsWith("aaa")).Select(ob=>ob.UnitPrice);
             //IQueryable[] aa = new IQueryable[5];
             //MyDbSet db = new MyDbSet();
             //var a = db.SalesOrderDetails.AsQueryable().Join(db.SalesOrderHeaders,

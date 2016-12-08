@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LINQapi.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
@@ -10,6 +11,7 @@ namespace LINQapi
     {
         public static void Register(HttpConfiguration config)
         {
+            Constants.db = new MyDbSet();
             // Web API configuration and services
             config.EnableCors();
 

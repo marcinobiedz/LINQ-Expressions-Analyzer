@@ -7,14 +7,12 @@ namespace LINQapi.Controllers
 {
     public class ChartController : ApiController
     {
-        private MyDbSet db = new MyDbSet();
-
         [EnableCors(origins: "http://localhost:63342", headers: "*", methods: "*")]
         [HttpPost]
         public ChartResponseModel Post([FromBody] string fromWeb)
         {
             //===============================================
-            fromWeb = Constants.FROM_WEB;
+            fromWeb = Constants.FROM_WEB_REF;
             //============================================
             ChartResponseModel response = new ChartResponseModel();
             if (string.IsNullOrEmpty(fromWeb) || string.IsNullOrWhiteSpace(fromWeb))
@@ -23,11 +21,11 @@ namespace LINQapi.Controllers
                 response.errors.Add("You did not typed any LINQ expression :(");
                 return response;
             }
-            WebQueryValidator queryValidator = new WebQueryValidator(fromWeb, db);
+            WebQueryValidator queryValidator = new WebQueryValidator(fromWeb, Constants.db);
             if (queryValidator.isValid)
             {
                 fromWeb = queryValidator.appendQuery(fromWeb);
-                QueryAnalyzer queryAna = new QueryAnalyzer(fromWeb, db);
+                QueryAnalyzer queryAna = new QueryAnalyzer(fromWeb, Constants.db);
                 if (queryAna.errors.Count > 0)
                 {
                     response.isResponseValid = false;
