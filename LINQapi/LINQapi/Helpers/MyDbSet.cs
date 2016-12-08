@@ -24,14 +24,14 @@ namespace LINQapi.Helpers
             setAddresses();
             Customers = new List<Customer>();
             setCustomers();
-            Products = new List<Product>();
-            setProducts();
             ProductCategories = new List<ProductCategory>();
             setProductCategories();
-            SalesOrderDetails = new List<SalesOrderDetail>();
-            setSalesOrderDetails();
+            Products = new List<Product>();
+            setProducts();
             SalesOrderHeaders = new List<SalesOrderHeader>();
             setSalesOrderHeaders();
+            SalesOrderDetails = new List<SalesOrderDetail>();
+            setSalesOrderDetails();
             Numbers = Enumerable.Range(0, 1000000).ToList();
             ColectionSizes.Add("Addresses", Addresses.Count);
             ColectionSizes.Add("Customers", Customers.Count);
@@ -49,23 +49,10 @@ namespace LINQapi.Helpers
             {
                 var line = reader.ReadLine();
                 var values = line.Split(';');
-                this.SalesOrderHeaders.Add(new SalesOrderHeader()
-                {
-                    SalesOrderID = Int32.Parse(values[0]),
-                    OrderDate = DateTime.Parse(values[1]),
-                    DueDate = DateTime.Parse(values[2]),
-                    Status = byte.Parse(values[3]),
-                    SalesOrderNumber = values[4],
-                    PurchaseOrderNumber = values[5],
-                    AccountNumber = values[6],
-                    CustomerID = Int32.Parse(values[7]),
-                    ShipToAddressID = Int32.Parse(values[8]),
-                    BillToAddressID = Int32.Parse(values[9]),
-                    SubTotal = decimal.Parse(values[10]),
-                    TaxAmt = decimal.Parse(values[11]),
-                    Freight = decimal.Parse(values[12]),
-                    TotalDue = decimal.Parse(values[13])
-                });
+                this.SalesOrderHeaders.Add(new SalesOrderHeader(int.Parse(values[0]), DateTime.Parse(values[1]),
+                    DateTime.Parse(values[2]), byte.Parse(values[3]), values[4], values[5], values[6], int.Parse(values[7]),
+                    int.Parse(values[8]), int.Parse(values[9]), decimal.Parse(values[10]), decimal.Parse(values[11]),
+                    decimal.Parse(values[12]), decimal.Parse(values[13]), Customers, Addresses));
             }
         }
 
@@ -76,16 +63,9 @@ namespace LINQapi.Helpers
             {
                 var line = reader.ReadLine();
                 var values = line.Split(';');
-                this.SalesOrderDetails.Add(new SalesOrderDetail()
-                {
-                    SalesOrderDetailID = Int32.Parse(values[0]),
-                    SalesOrderID = Int32.Parse(values[1]),
-                    OrderQty = short.Parse(values[2]),
-                    ProductID = int.Parse(values[3]),
-                    UnitPrice = decimal.Parse(values[4]),
-                    UnitPriceDiscount = decimal.Parse(values[5]),
-                    LineTotal = decimal.Parse(values[6])
-                });
+                this.SalesOrderDetails.Add(new SalesOrderDetail(int.Parse(values[0]), int.Parse(values[1]), short.Parse(values[2]),
+                    int.Parse(values[3]), decimal.Parse(values[4]), decimal.Parse(values[5]), decimal.Parse(values[6]),
+                    SalesOrderHeaders, Products));
             }
         }
 
@@ -96,11 +76,7 @@ namespace LINQapi.Helpers
             {
                 var line = reader.ReadLine();
                 var values = line.Split(';');
-                this.ProductCategories.Add(new ProductCategory()
-                {
-                    ProductCategoryID = Int32.Parse(values[0]),
-                    Name = values[1]
-                });
+                this.ProductCategories.Add(new ProductCategory(Int32.Parse(values[0]), values[1]));
             }
         }
 
@@ -111,16 +87,8 @@ namespace LINQapi.Helpers
             {
                 var line = reader.ReadLine();
                 var values = line.Split(';');
-                this.Products.Add(new Product()
-                {
-                    ProductID = Int32.Parse(values[0]),
-                    Name = values[1],
-                    ProductNumber = values[2],
-                    StandardCost = decimal.Parse(values[3]),
-                    ListPrice = decimal.Parse(values[4]),
-                    ProductCategoryID = int.Parse(values[5]),
-                    SellStartDate = DateTime.Parse(values[6])
-                });
+                this.Products.Add(new Product(int.Parse(values[0]), values[1], values[2], decimal.Parse(values[3]),
+                    decimal.Parse(values[4]), int.Parse(values[5]), DateTime.Parse(values[6]), this.ProductCategories));
             }
         }
 
@@ -131,14 +99,7 @@ namespace LINQapi.Helpers
             {
                 var line = reader.ReadLine();
                 var values = line.Split(';');
-                this.Customers.Add(new Customer()
-                {
-                    CustomerID = Int32.Parse(values[0]),
-                    FirstName = values[1],
-                    LastName = values[2],
-                    EmailAddress = values[3],
-                    Phone = values[4]
-                });
+                this.Customers.Add(new Customer(Int32.Parse(values[0]), values[1], values[2], values[3], values[4]));
             }
         }
 
@@ -149,14 +110,7 @@ namespace LINQapi.Helpers
             {
                 var line = reader.ReadLine();
                 var values = line.Split(';');
-                this.Addresses.Add(new Address()
-                {
-                    AddressID = Int32.Parse(values[0]),
-                    AddressLine = values[1],
-                    City = values[2],
-                    CountryRegion = values[3],
-                    PostalCode = values[4]
-                });
+                this.Addresses.Add(new Address(Int32.Parse(values[0]), values[1], values[2], values[3], values[4]));
             }
         }
     }

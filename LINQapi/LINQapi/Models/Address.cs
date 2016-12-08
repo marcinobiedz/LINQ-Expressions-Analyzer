@@ -8,6 +8,15 @@ namespace LINQapi.Models
 {
     public class Address
     {
+        public Address(int AddressID, string AddressLine, string City, string CountryRegion, string PostalCode)
+        {
+            this.AddressID = AddressID;
+            this.AddressLine = AddressLine;
+            this.City = City;
+            this.CountryRegion = CountryRegion;
+            this.PostalCode = PostalCode;
+        }
+
         public int AddressID { get; set; }
         public string AddressLine { get; set; }
         public string City { get; set; }
