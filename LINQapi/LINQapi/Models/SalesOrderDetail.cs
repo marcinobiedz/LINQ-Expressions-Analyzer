@@ -14,18 +14,18 @@ namespace LINQapi.Models
             this.UnitPrice = UnitPrice;
             this.UnitPriceDiscount = UnitPriceDiscount;
             this.LineTotal = LineTotal;
-            this.SalesOrderHeader = SalesOrderHeaders.Find(soh => soh.SalesOrderID == this.SalesOrderID);
+            this.SalesOrder = SalesOrderHeaders.Find(soh => soh.SalesOrderID == this.SalesOrderID);
             this.Product = Products.Find(prod => prod.ProductID == this.ProductID);
         }
-        private int SalesOrderID { get; set; }
-        private int ProductID { get; set; }
+        private int SalesOrderID { get; }
+        private int ProductID { get; }
 
-        public int SalesOrderDetailID { get; set; }
-        public SalesOrderHeader SalesOrderHeader { get; set; }
-        public short OrderQty { get; set; }
-        public Product Product { get; set; }
-        public decimal UnitPrice { get; set; }
-        public decimal UnitPriceDiscount { get; set; }
-        public decimal LineTotal { get; set; }
+        public int SalesOrderDetailID { get; }
+        public SalesOrderHeader SalesOrder { get; }
+        public short OrderQty { get; }
+        public Product Product { get; }
+        public decimal UnitPrice { get; }
+        public decimal UnitPriceDiscount { get; }
+        public decimal LineTotal { get; }
     }
 }

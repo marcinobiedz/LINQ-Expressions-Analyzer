@@ -14,7 +14,7 @@ namespace LINQapi.Models
             this.Name = Name;
         }
 
-        public int ProductCategoryID { get; set; }
-        public string Name { get; set; }
+        public int ProductCategoryID { get; }
+        public string Name { get; }
     }
 }

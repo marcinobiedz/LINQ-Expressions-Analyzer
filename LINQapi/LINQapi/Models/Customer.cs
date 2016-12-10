@@ -17,10 +17,10 @@ namespace LINQapi.Models
             this.Phone = Phone;
         }
 
-        public int CustomerID { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string EmailAddress { get; set; }
-        public string Phone { get; set; }
+        public int CustomerID { get; }
+        public string FirstName { get; }
+        public string LastName { get; }
+        public string EmailAddress { get; }
+        public string Phone { get; }
     }
 }

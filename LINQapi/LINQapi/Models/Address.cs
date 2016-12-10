@@ -17,10 +17,10 @@ namespace LINQapi.Models
             this.PostalCode = PostalCode;
         }
 
-        public int AddressID { get; set; }
-        public string AddressLine { get; set; }
-        public string City { get; set; }
-        public string CountryRegion { get; set; }
-        public string PostalCode { get; set; }
+        public int AddressID { get; }
+        public string AddressLine { get; }
+        public string City { get; }
+        public string CountryRegion { get; }
+        public string PostalCode { get; }
     }
 }

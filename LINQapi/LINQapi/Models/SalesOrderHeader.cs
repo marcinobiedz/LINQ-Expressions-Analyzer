@@ -27,23 +27,23 @@ namespace LINQapi.Models
             ShipToAddress = Addresses.Find(ad => ad.AddressID == this.ShipToAddressID);
             BillToAddress = Addresses.Find(ad => ad.AddressID == this.BillToAddressID);
         }
-        private int ShipToAddressID { get; set; }
-        private int BillToAddressID { get; set; }
-        private int CustomerID { get; set; }
+        private int ShipToAddressID { get; }
+        private int BillToAddressID { get; }
+        private int CustomerID { get; }
 
-        public int SalesOrderID { get; set; }
-        public DateTime OrderDate { get; set; }
-        public DateTime DueDate { get; set; }
-        public byte Status { get; set; }
-        public Customer Customer { get; set; }
-        public Address BillToAddress { get; set; }
-        public Address ShipToAddress { get; set; }
-        public string SalesOrderNumber { get; set; }
-        public string PurchaseOrderNumber { get; set; }
-        public string AccountNumber { get; set; }
-        public decimal SubTotal { get; set; }
-        public decimal TaxAmt { get; set; }
-        public decimal Freight { get; set; }
-        public decimal TotalDue { get; set; }
+        public int SalesOrderID { get; }
+        public DateTime OrderDate { get; }
+        public DateTime DueDate { get; }
+        public byte Status { get; }
+        public Customer Customer { get; }
+        public Address BillToAddress { get; }
+        public Address ShipToAddress { get; }
+        public string SalesOrderNumber { get; }
+        public string PurchaseOrderNumber { get; }
+        public string AccountNumber { get; }
+        public decimal SubTotal { get; }
+        public decimal TaxAmt { get; }
+        public decimal Freight { get; }
+        public decimal TotalDue { get; }
     }
 }

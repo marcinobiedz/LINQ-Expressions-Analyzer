@@ -17,14 +17,14 @@ namespace LINQapi.Models
             this.SellStartDate = SellStartDate;
             ProductCategory = ProductCategories.Find(cat => cat.ProductCategoryID == this.ProductCategoryID);
         }
-        private int ProductCategoryID { get; set; }
+        private int ProductCategoryID { get; }
 
-        public int ProductID { get; set; }
-        public string Name { get; set; }
-        public string ProductNumber { get; set; }
-        public decimal StandardCost { get; set; }
-        public decimal ListPrice { get; set; }
-        public ProductCategory ProductCategory { get; set; }
-        public DateTime SellStartDate { get; set; }
+        public int ProductID { get; }
+        public string Name { get; }
+        public string ProductNumber { get; }
+        public decimal StandardCost { get; }
+        public decimal ListPrice { get; }
+        public ProductCategory ProductCategory { get; }
+        public DateTime SellStartDate { get; }
     }
 }
