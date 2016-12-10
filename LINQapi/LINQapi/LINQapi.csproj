@@ -142,6 +142,12 @@
     <Content Include="Database\ProductCategory.csv" />
     <Content Include="Database\SalesOrderDetail.csv" />
     <Content Include="Database\SalesOrderHeader.csv" />
+    <Content Include="TestDatabase\Address.csv" />
+    <Content Include="TestDatabase\Customer.csv" />
+    <Content Include="TestDatabase\Product.csv" />
+    <Content Include="TestDatabase\ProductCategory.csv" />
+    <Content Include="TestDatabase\SalesOrderDetail.csv" />
+    <Content Include="TestDatabase\SalesOrderHeader.csv" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
