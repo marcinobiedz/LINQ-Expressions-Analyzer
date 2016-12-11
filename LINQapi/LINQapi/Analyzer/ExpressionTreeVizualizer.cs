@@ -125,12 +125,12 @@ namespace LINQapi.Helpers
             if (expression is MemberExpression)
             {
                 var expr = expression as MemberExpression;
-                node = new ExpressionTreeNode(string.Format("MemberExpression [{0}]: {1}",
-                        expr.Type.Name,
-                        expr.Expression.ToString() + "." + expr.Member.Name),
-                    expr.Expression.ToString() + "." + expr.Member.Name,
-                    parentId);
+                //node = new ExpressionTreeNode(string.Format("MemberExpression [{0}]: {1}", expr.Type.Name, expr.Expression.ToString() + "." + 
+                //expr.Member.Name), expr.Expression.ToString() + "." + expr.Member.Name, parentId);
+                node = new ExpressionTreeNode(string.Format("MemberExpression [{0}]: {1}", expr.Type.Name, expr.Member.Name), expr.Member.Name, parentId);
                 node.Id = nextId();
+                // To comment with second version
+                GetExpressionTreeNode(expr.Expression, parentId: node.Id);
             }
             if (expression is MemberInitExpression)
             {
@@ -147,6 +147,8 @@ namespace LINQapi.Helpers
                     expr.Method.Name,
                     parentId);
                 node.Id = nextId();
+                if (expr.Object != null)
+                    GetExpressionTreeNode(expr.Object, parentId: node.Id);
                 expr.Arguments.ToList().ForEach(a => GetExpressionTreeNode(a, parentId: node.Id));
             }
             if (expression is NewArrayExpression)
@@ -164,7 +166,7 @@ namespace LINQapi.Helpers
             if (expression is ParameterExpression)
             {
                 var expr = expression as ParameterExpression;
-                node = new ExpressionTreeNode(string.Format("ParameterExpression [{0}]: {1}", expr.Type, expr.Name),expr.Name, parentId);
+                node = new ExpressionTreeNode(string.Format("ParameterExpression [{0}]: {1}", expr.Type, expr.Name), expr.Name, parentId);
                 node.Id = nextId();
             }
             if (expression is RuntimeVariablesExpression)

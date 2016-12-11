@@ -12,7 +12,7 @@ namespace LINQapi.Controllers
         public ChartResponseModel Post([FromBody] string fromWeb)
         {
             //===============================================
-            fromWeb = Constants.FROM_WEB_REF;
+            //fromWeb = Constants.FROM_WEB_REF;
             //============================================
             ChartResponseModel response = new ChartResponseModel();
             if (string.IsNullOrEmpty(fromWeb) || string.IsNullOrWhiteSpace(fromWeb))
