@@ -8,7 +8,7 @@ namespace LINQapi.Helpers
 {
     public class MyDbSet
     {
-        private string path = AppDomain.CurrentDomain.BaseDirectory + @"Database\";
+        private string path = AppDomain.CurrentDomain.BaseDirectory + Constants.TEST_DB_PATH;
         public List<Address> Addresses { get; }
         public List<Customer> Customers { get; }
         public List<Product> Products { get; }

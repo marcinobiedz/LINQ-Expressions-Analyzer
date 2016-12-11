@@ -136,18 +136,18 @@
     <Content Include="packages.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Database\Address.csv" />
-    <Content Include="Database\Customer.csv" />
-    <Content Include="Database\Product.csv" />
-    <Content Include="Database\ProductCategory.csv" />
-    <Content Include="Database\SalesOrderDetail.csv" />
-    <Content Include="Database\SalesOrderHeader.csv" />
-    <Content Include="TestDatabase\Address.csv" />
-    <Content Include="TestDatabase\Customer.csv" />
-    <Content Include="TestDatabase\Product.csv" />
-    <Content Include="TestDatabase\ProductCategory.csv" />
-    <Content Include="TestDatabase\SalesOrderDetail.csv" />
-    <Content Include="TestDatabase\SalesOrderHeader.csv" />
+    <Content Include="Database\Large\Address.csv" />
+    <Content Include="Database\Large\Customer.csv" />
+    <Content Include="Database\Large\Product.csv" />
+    <Content Include="Database\Large\ProductCategory.csv" />
+    <Content Include="Database\Large\SalesOrderDetail.csv" />
+    <Content Include="Database\Large\SalesOrderHeader.csv" />
+    <Content Include="Database\Small\Address.csv" />
+    <Content Include="Database\Small\Customer.csv" />
+    <Content Include="Database\Small\Product.csv" />
+    <Content Include="Database\Small\ProductCategory.csv" />
+    <Content Include="Database\Small\SalesOrderDetail.csv" />
+    <Content Include="Database\Small\SalesOrderHeader.csv" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
