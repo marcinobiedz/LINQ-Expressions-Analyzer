@@ -1,2 +1,2 @@
-# LINQ-Expressions-Analyzer
+# LINQapi
 MSc project.
