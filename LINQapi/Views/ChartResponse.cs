@@ -1,16 +1,14 @@
-﻿using LINQapi.Analyzer;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Web;
 
-namespace LINQapi.Models
+namespace LINQapi.Views
 {
-    [DataContract]
-    public class TreeResponseModel
+    public class ChartResponse
     {
-        public TreeResponseModel()
+        public ChartResponse()
         {
             isResponseValid = false;
             errors = new List<string>();
@@ -23,6 +21,15 @@ namespace LINQapi.Models
         public List<string> errors { get; set; }
 
         [DataMember]
-        public List<ExpressionTreeNode> tree { get; set; }
+        public int[] initialCounts { get; set; }
+
+        [DataMember]
+        public int[] finalCounts { get; set; }
+
+        [DataMember]
+        public long[] executionTimes { get; set; }
+
+        [DataMember]
+        public TableResponse[] tablesInfo { get; set; }
     }
 }

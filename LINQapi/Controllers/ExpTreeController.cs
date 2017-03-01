@@ -1,7 +1,6 @@
 ﻿using LINQapi.Analyzer;
 using LINQapi.Helpers;
-using LINQapi.Models;
-using LINQapi.Tests;
+using LINQapi.Views;
 using System.Web.Http;
 using System.Web.Http.Cors;
 
@@ -13,12 +12,12 @@ namespace LINQapi.Controllers
 
         [EnableCors(origins: "http://localhost:63342", headers: "*", methods: "*")]
         [HttpPost]
-        public TreeResponseModel Post([FromBody] string fromWeb)
+        public TreeResponse Post([FromBody] string fromWeb)
         {
             //===============================================
             //fromWeb = Constants.FROM_WEB_REF;
             //============================================
-            TreeResponseModel response = new TreeResponseModel();
+            TreeResponse response = new TreeResponse();
             if (string.IsNullOrEmpty(fromWeb) || string.IsNullOrWhiteSpace(fromWeb))
             {
                 response.isResponseValid = false;

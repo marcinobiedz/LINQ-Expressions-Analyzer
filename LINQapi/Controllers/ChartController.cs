@@ -1,5 +1,5 @@
 ﻿using LINQapi.Helpers;
-using LINQapi.Models;
+using LINQapi.Views;
 using System.Web.Http;
 using System.Web.Http.Cors;
 
@@ -9,12 +9,12 @@ namespace LINQapi.Controllers
     {
         [EnableCors(origins: "http://localhost:63342", headers: "*", methods: "*")]
         [HttpPost]
-        public ChartResponseModel Post([FromBody] string fromWeb)
+        public ChartResponse Post([FromBody] string fromWeb)
         {
             //===============================================
             //fromWeb = Constants.FROM_WEB_REF;
             //============================================
-            ChartResponseModel response = new ChartResponseModel();
+            ChartResponse response = new ChartResponse();
             if (string.IsNullOrEmpty(fromWeb) || string.IsNullOrWhiteSpace(fromWeb))
             {
                 response.isResponseValid = false;

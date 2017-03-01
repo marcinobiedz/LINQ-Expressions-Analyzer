@@ -111,8 +111,8 @@
     <Compile Include="Controllers\ChartController.cs" />
     <Compile Include="Controllers\ExpTreeController.cs" />
     <Compile Include="Helpers\ListHelper.cs" />
-    <Compile Include="Models\ChartResponseModel.cs" />
-    <Compile Include="Models\TableInfoModel.cs" />
+    <Compile Include="Views\ChartResponse.cs" />
+    <Compile Include="Views\TableResponse.cs" />
     <Compile Include="Tests\TestPlayground.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -129,7 +129,7 @@
     <Compile Include="Models\ProductCategory.cs" />
     <Compile Include="Models\SalesOrderDetail.cs" />
     <Compile Include="Models\SalesOrderHeader.cs" />
-    <Compile Include="Models\TreeResponseModel.cs" />
+    <Compile Include="Views\TreeResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -4,12 +4,12 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Web;
 
-namespace LINQapi.Models
+namespace LINQapi.Views
 {
     [DataContract]
-    public class TableInfoModel
+    public class TableResponse
     {
-        public TableInfoModel(string TableName, int TableCount)
+        public TableResponse(string TableName, int TableCount)
         {
             this.TableName = TableName;
             this.TableCount = TableCount;
