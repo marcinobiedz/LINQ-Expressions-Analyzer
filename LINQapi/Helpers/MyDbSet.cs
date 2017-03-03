@@ -1,6 +1,7 @@
 ﻿using LINQapi.Models;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 
@@ -8,7 +9,7 @@ namespace LINQapi.Helpers
 {
     public class MyDbSet
     {
-        private string path = AppDomain.CurrentDomain.BaseDirectory + Constants.DB_PATH;
+        private string path = AppDomain.CurrentDomain.BaseDirectory + ConfigurationManager.AppSettings["DB_PATH"];
         public List<Address> Addresses { get; }
         public List<Customer> Customers { get; }
         public List<Product> Products { get; }
