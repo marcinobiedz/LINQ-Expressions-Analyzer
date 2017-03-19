@@ -6,20 +6,9 @@ using System.Web;
 
 namespace LINQapi.Views
 {
-    public class ChartResponse
+    [DataContract]
+    public class ChartResponse : BaseResponse
     {
-        public ChartResponse()
-        {
-            isResponseValid = false;
-            errors = new List<string>();
-        }
-
-        [DataMember(IsRequired = true)]
-        public bool isResponseValid { get; set; }
-
-        [DataMember]
-        public List<string> errors { get; set; }
-
         [DataMember]
         public int[] initialCounts { get; set; }
 

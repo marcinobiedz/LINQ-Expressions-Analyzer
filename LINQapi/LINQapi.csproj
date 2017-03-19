@@ -111,6 +111,7 @@
     <Compile Include="Controllers\ChartController.cs" />
     <Compile Include="Controllers\ExpTreeController.cs" />
     <Compile Include="Helpers\ListHelper.cs" />
+    <Compile Include="Views\BaseResponse.cs" />
     <Compile Include="Views\ChartResponse.cs" />
     <Compile Include="Views\TableResponse.cs" />
     <Compile Include="Tests\TestPlayground.cs" />

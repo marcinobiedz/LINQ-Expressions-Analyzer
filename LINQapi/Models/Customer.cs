@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,6 +21,7 @@ namespace LINQapi.Models
         public int CustomerID { get; }
         public string FirstName { get; }
         public string LastName { get; }
+        [DataType(DataType.EmailAddress)]
         public string EmailAddress { get; }
         public string Phone { get; }
     }

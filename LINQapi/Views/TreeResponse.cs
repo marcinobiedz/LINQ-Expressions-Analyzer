@@ -8,20 +8,8 @@ using System.Web;
 namespace LINQapi.Views
 {
     [DataContract]
-    public class TreeResponse
+    public class TreeResponse : BaseResponse
     {
-        public TreeResponse()
-        {
-            isResponseValid = false;
-            errors = new List<string>();
-        }
-
-        [DataMember(IsRequired = true)]
-        public bool isResponseValid { get; set; }
-
-        [DataMember]
-        public List<string> errors { get; set; }
-
         [DataMember]
         public List<ExpressionTreeNode> tree { get; set; }
     }
