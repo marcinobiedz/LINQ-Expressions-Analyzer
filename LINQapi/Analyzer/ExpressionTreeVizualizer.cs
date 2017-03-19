@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace LINQapi.Helpers
+namespace LINQapi.Analyzer
 {
     public class ExpressionTreeVizualizer
     {
