@@ -47,10 +47,24 @@ namespace LINQapi.Helpers
                 {
                     initialCounts[i] = (overallTableSize * (i + 1)) / Constants.DB_DIVIDER;
                     var stopwatch = new Stopwatch();
+                    var count = 0;
+                    var any = false;
+                    try
+                    {
+                       any = generatedQueries[i].Any();
+                    }
+                    catch (System.Exception)
+                    {
+                        Debug.WriteLine("Null query!");
+                    }
                     stopwatch.Start();
-                    var list = generatedQueries[i].ToList();
+                    if (any)
+                    {
+                        var list = generatedQueries[i].ToList();
+                        count = list.Count;
+                    }
                     stopwatch.Stop();
-                    finalCounts[i] = list.Count;
+                    finalCounts[i] = count;
                     executionTimes[i] = stopwatch.ElapsedTicks;
                 }
                 tablesInfo = db.ColectionSizes.Select(col => new TableResponse(col.Key, col.Value)).ToArray();
