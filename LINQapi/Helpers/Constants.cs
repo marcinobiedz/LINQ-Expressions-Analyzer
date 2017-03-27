@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Web;
+﻿using System.Configuration;
 
 namespace LINQapi.Helpers
 {
@@ -11,5 +7,6 @@ namespace LINQapi.Helpers
         public static MyDbSet db;
         public static readonly int DB_DIVIDER = int.Parse(ConfigurationManager.AppSettings["DB_DIVIDER"]);
         public static readonly string FROM_WEB_REF = ConfigurationManager.AppSettings["FROM_WEB_REF"];
+        public static readonly string UI_URL = ConfigurationManager.AppSettings["UI_URL"];
     }
 }

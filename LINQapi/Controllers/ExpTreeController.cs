@@ -2,15 +2,13 @@
 using LINQapi.Helpers;
 using LINQapi.Views;
 using System.Web.Http;
-using System.Web.Http.Cors;
 
 namespace LINQapi.Controllers
 {
     public class ExpTreeController : ApiController
     {
         private ExpressionTreeVizualizer expTreeVizualizer = new ExpressionTreeVizualizer();
-
-        [EnableCors(origins: "http://localhost:63342", headers: "*", methods: "*")]
+        
         [HttpPost]
         public TreeResponse Post([FromBody] string fromWeb)
         {
