@@ -9,7 +9,8 @@ namespace LINQapi.Helpers
 {
     public class MyDbSet
     {
-        private string path = AppDomain.CurrentDomain.BaseDirectory + ConfigurationManager.AppSettings["DB_PATH"];
+        private string basePath = AppDomain.CurrentDomain.BaseDirectory;
+        private string path;
         public List<Address> Addresses { get; }
         public List<Customer> Customers { get; }
         public List<Product> Products { get; }
@@ -21,6 +22,7 @@ namespace LINQapi.Helpers
 
         public MyDbSet()
         {
+            path = basePath + (ConfigurationManager.AppSettings["DB_PATH"] == "Prod" ? @"Database\Large\" : @"Database\Small\");
             Addresses = new List<Address>();
             setAddresses();
             Customers = new List<Customer>();
